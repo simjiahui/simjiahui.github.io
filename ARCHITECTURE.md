@@ -50,37 +50,42 @@ The static HTML carries a build-time snapshot. The client lazily imports the ast
 
 The disc occupies a fixed compositional position; its altitude/azimuth do not determine its pixel position. Reference sky coordinates are displayed separately in observation notes. The phase orientation is north-up, rather than the visitor's local sky angle. No visitor geolocation is requested.
 
-For a normalized disc point `(x,y)`, take `z = sqrt(1-x²-y²)`. With lunar elongation `ψ`, the illustrative directional light is `(sin ψ, 0, -cos ψ)`. The positive dot product gives the visible lit surface. Procedural low-amplitude texture and a fixed crater field select glyphs from a luminosity ramp. This is not a lunar albedo map, photograph, libration model, or exact projected terminator ephemeris; the displayed numerical illumination comes from Astronomy Engine.
+For a normalized disc point `(x,y)`, take `z = sqrt(1-x²-y²)`. The real illuminated fraction `f` sets a light vector with `Lz = 2f − 1` and `Lx = ±sqrt(1 − Lz²)`. The sign comes from the full elongation angle, preserving waxing/waning orientation. Positive dot products reproduce the illuminated projected disc area. A rough diffuse (Lommel–Seeliger-like) response, broad maria, four-octave terrain noise, 46 crater rims, and restrained ejecta rays produce luminosity-coded ASCII. The texture is illustrative, not a photographic albedo map or libration model.
 
-The sphere is corrected for the approximate width/height ratio of monospace character cells. Rendering uses actual Canvas `fillText`, not a tilde-line illustration. Blue and pink are restrained accents across the textured water and stars. The Canvas is decorative and hidden from assistive technologies; all factual readouts are real text outside it.
+The moon has a fixed compositional position, separately documented from its real reference sky coordinates. Reflection follows the bright side's approximate centroid and physical illuminated fraction; a new moon has no artificial full-moon reflection. No visitor geolocation is requested.
 
 ## Artistic ocean dynamics
 
-The real lunar phase and the animated sea use separate clocks. For visual time `t` seconds, let `h = 2400t / 3600` accelerated solar hours. The conceptual water-level envelope is
+The slow envelope now starts from actual topocentric **Sun and Moon declinations, hour angles, and distances** at the Sendai reference location. For each body, latitude `φ`, declination `δ`, and hour angle `H` give a vertical direction cosine and a quadrupolar equilibrium potential:
 
 ```text
-E(t,ψ) = 0.65 cos(2πh/12.4206 − 2ψ) + 0.30 cos(2πh/12).
+q = sin φ sin δ + cos φ cos δ cos H
+P₂(q) = (3q² − 1) / 2
+E = 0.65 (rMoon,mean/rMoon)³ P₂(qMoon)
+  + 0.30 (1 AU/rSun)³ P₂(qSun)
 ```
 
-Those are the approximate lunar semidiurnal M2 and solar semidiurnal S2 periods. Their epoch and coefficients are illustrative, not derived from the reference observer's local ocean. A spring–neap multiplier `(1 + cos(2ψ))/2` modulates wave strength. Their interference changes the drawn horizon by a small fraction of the scene height.
+Real sidereal time and apparent equatorial coordinates initialize the hour angles. For visual evolution, those angles advance at approximate lunar-day (24.8412 h) and solar-day (24 h) rates, accelerated **720×**. The principal semidiurnal visual cycle is approximately a minute, rather than the earlier 18-second cycle. Geometry refreshes each minute without resetting the continuous visual clock. Declinations/distances are held between updates; this is not a rapidly advanced ephemeris. The numeric-angle helper used for deterministic static/test scenes is an equatorial reference configuration, not local sky geometry.
 
-Three propagating sinusoidal layers add swell, crossing waves, and short ripples at different spatial and temporal frequencies. A Gaussian reflection corridor broadens with distance below the horizon and meanders with the waves; its brightness depends on lunar illumination. Fields are mapped to a varied ASCII glyph ramp and muted color/alpha values.
+Six directional wave bands combine swell, crossing seas, wind waves, and fine ripples. Two slow domain distortions prevent a visibly repeating sinusoidal grid. A perspective mapping compresses distant wavelengths; slopes, crest contours, and capillary ripples modulate shading. The geometry is illustrative and the distorted slope approximation is used for light, not fluid integration. Narrow cream glints are broken by changing surface facets; blue crest lines and rare sakura-pink edge glints sit over dark troughs. Reflection width expands toward the foreground and its path wanders with the waves, rather than remaining a rigid bright stripe.
 
-**No output is in metres, and no coastal tide is predicted.** Bathymetry, coastline shape, local harmonic constituents, weather, and ocean boundary conditions are absent. Even the reference moon coordinates do not make the sea local to Sendai. The colophon and hero notes state this distinction.
+**No output is in metres, and no coastal tide is predicted.** Local bathymetry, coastline shape, measured harmonic constituents, weather, and ocean boundary conditions are absent. Actual celestial geometry does not turn this artistic sea into a local tide table or daylight sky simulation.
 
 ## Rendering, performance, and lifecycle
 
-- Target: 30 FPS on capable devices, via `requestAnimationFrame` with a frame interval cap.
-- Pixel ratio capped at 1.5. Character height starts at 14 px, or 17 px on narrow screens.
-- Every 60 frames, average draw cost is checked; expensive scenes use fewer characters.
-- ResizeObserver recomputes cell count and Canvas size.
-- IntersectionObserver pauses animation outside the viewport; page visibility pauses it in background tabs.
-- `prefers-reduced-motion` draws a still frame and starts/stops live motion when the preference changes.
-- A pre-rendered detailed ASCII `<pre>` is the no-JavaScript/Canvas fallback.
-- Event listeners, observers, timer, and animation frame are cleaned up before any future Astro page-swap integration. Current navigation is ordinary document navigation, whose teardown releases the page.
-- Overlay gradients provide a quiet field behind text. Mobile composition reserves space above the name for the moon.
+- A packed cell code selects a glyph and one of 24 intensity levels in four palettes. Numeric wave sampling reuses one scratch object instead of allocating per cell.
+- A locally rasterized glyph atlas caches text shaping. The textured moon and stars are cached into a static sky layer and rebuilt only for size/quality/ephemeris changes.
+- Animated water glyphs are composed into a reusable typed pixel buffer using cached sparse glyph masks, then uploaded/blitted as **one image per frame**. This avoids thousands of Canvas draw calls without replacing the animation with pre-recorded media.
+- Target: 30 FPS. Desktop starts at 8.5 px cells with a 350-column ceiling; mobile starts at 9 px cells. Density adapts when measured drawing cost is too high and can recover gradually.
+- Pixel ratio is capped at 1.5 desktop and 1.25 mobile. Buffers, masks, glyph shaping, sky, and Canvas dimensions are rebuilt only as required.
+- ResizeObserver batches changes. IntersectionObserver and page visibility pause off-screen/background rendering. Reduced motion produces a detailed still frame; real calendar updates remain available.
+- Responsive desktop/mobile pre-rendered ASCII snapshots provide a no-JavaScript/Canvas fallback. Their lunar state is the build-time snapshot.
+- Timers, observers, queued resize work, and animation callbacks are released before a page swap/unload. Back-forward cache restoration resumes without resetting the visual clock.
+- Hero-only gradients protect heading/navigation legibility and leave the right-hand sea open. No typography, navigation, or other page layout is changed by this refinement.
 
-The initial hero client chunk is roughly 5 KB before gzip. Astronomy/calendar calculations are a separate lazy-loaded chunk; those libraries are intentionally more substantial than the renderer. Other pages do not load them. The static server generates all content and equations, leaving the browser little non-artistic work.
+Astronomy/calendar calculations remain a separate lazy-loaded chunk. Other pages do not load the animation. The static server still generates all content and mathematical typesetting.
+
+`scripts/animation-check.ts` captures actual desktop/tablet/phone frames, four deterministic lunar-phase fixtures, reduced motion, and the no-JavaScript fallback, and measures drawing time/FPS. Run after `npm run build` with `ASTRO_TELEMETRY_DISABLED=1 node --import tsx scripts/animation-check.ts`. Artifacts go to ignored `artifacts/lunar-refinement/`. Headless measurements are specific to the test host, not a guarantee for every device.
 
 ## CV generation
 

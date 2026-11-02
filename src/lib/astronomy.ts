@@ -5,6 +5,7 @@ import {
   Illumination,
   MoonPhase,
   Observer,
+  SiderealTime,
 } from "astronomy-engine";
 import { Solar } from "lunar-javascript";
 export const REFERENCE = {
@@ -58,6 +59,9 @@ export function moonState(date = new Date()) {
     REFERENCE.elevation,
   );
   const equatorial = Equator(Body.Moon, date, observer, true, true);
+  const solar = Equator(Body.Sun, date, observer, true, true);
+  const sidereal = SiderealTime(date) + REFERENCE.longitude / 15;
+  const radians = Math.PI / 180;
   const horizon = Horizon(
     date,
     observer,
@@ -74,6 +78,15 @@ export function moonState(date = new Date()) {
     altitude: horizon.altitude,
     azimuth: horizon.azimuth,
     calendar: lunarCalendar(date),
+    forcing: {
+      latitude: REFERENCE.latitude * radians,
+      lunarDeclination: equatorial.dec * radians,
+      solarDeclination: solar.dec * radians,
+      lunarHourAngle: (sidereal - equatorial.ra) * 15 * radians,
+      solarHourAngle: (sidereal - solar.ra) * 15 * radians,
+      lunarDistance: equatorial.dist,
+      solarDistance: solar.dist,
+    },
   };
 }
 export type MoonState = ReturnType<typeof moonState>;
