@@ -2,10 +2,10 @@
   "_editing": "Edit the wording below. See CONTENT_GUIDE.md for line breaks, italics, and {placeholders}. Keep keys unchanged.",
   "shared": {
     "biography": "I am a 2nd year PhD student in mathematics at Tohoku University. My research interests span dynamical systems, reservoir computing, machine learning, network topology, synchronization, causality and time-series forecasting.",
-    "biographyNote": "I love learning!",
+    "biographyNote": "",
     "siteDescription": "A personal observatory for dynamical systems, learning, and the patterns that connect them.",
     "headingPunctuation": ".",
-    "portraitAlt": "Portrait of {name}",
+    "portraitAlt": "Portrait of Jia Hui",
     "emailLabel": "Email",
     "cvLabel": "CV",
     "sectionLink": "Explore more",
