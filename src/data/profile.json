@@ -1,6 +1,6 @@
 {
-  "name": "Your name",
-  "nameIsPlaceholder": true,
+  "name": "Jiahui Sim",
+  "nameIsPlaceholder": false,
   "siteTitle": "Moonlit Tides",
   "description": "A personal observatory for dynamical systems, learning, and the patterns that connect them.",
   "role": "PhD researcher in applied mathematics",
@@ -9,12 +9,16 @@
   "email": "",
   "portrait": "",
   "biography": "I am a PhD researcher in applied mathematics at Tohoku University. My research interests span dynamical systems, reservoir computing, machine learning, network topology, synchronization, and time-series forecasting.",
-  "biographyNote": "This introduction uses only the research context supplied for this site. Add your name, background, and personal story when you are ready.",
+  "biographyNote": "This introduction uses only the research context supplied for this site. Add your background and personal story when you are ready.",
   "interests": [],
   "links": [
     {
       "label": "GitHub",
       "url": "https://github.com/simjiahui"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/jiahui-sim/"
     }
   ],
   "navigation": [
@@ -44,7 +48,7 @@
     },
     {
       "label": "CV",
-      "href": "/cv/"
+      "href": "/cv.pdf"
     }
   ],
   "gallery": [

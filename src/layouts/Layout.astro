@@ -63,10 +63,8 @@ const pageTitle = title
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="nav-wrap">
-        <a class="wordmark" href="/" aria-label="Moonlit Tides home"
-          ><span aria-hidden="true" class="brand-moon">☾</span> Moonlit <em
-            >Tides</em
-          ><span class="brand-dot" aria-hidden="true">.</span></a
+        <a class="wordmark" href="/" aria-label={`${profile.name} home`}
+          >{profile.name}</a
         >
         <button
           class="menu-toggle"
@@ -82,10 +80,10 @@ const pageTitle = title
                 aria-current={
                   Astro.url.pathname === link.href ? "page" : undefined
                 }
-                class:list={[{ "nav-cv": link.href === "/cv/" }]}
+                class:list={[{ "nav-cv": link.href === "/cv.pdf" }]}
               >
                 {link.label}
-                {link.href === "/cv/" && (
+                {link.href === "/cv.pdf" && (
                   <span aria-hidden="true">
                     {" "}
                     <span class="arrow-icon" aria-hidden="true" />
@@ -101,9 +99,7 @@ const pageTitle = title
     <footer class="site-footer">
       <div class="container footer-grid">
         <div>
-          <a class="wordmark" href="/"
-            >Moonlit <em>Tides</em><span class="brand-dot">.</span></a
-          ><p>
+          <a class="wordmark" href="/">{profile.name}</a><p>
             A personal observatory beside the ocean.<br />Dynamics, learning,
             and a little wonder.
           </p>
@@ -122,11 +118,8 @@ const pageTitle = title
                   Email <span class="arrow-icon" aria-hidden="true" />
                 </a>
               )
-            }<a href="/rss.xml"
-              >RSS <span class="arrow-icon" aria-hidden="true"></span></a
-            ><a href="/cv/"
-              >Curriculum vitae <span class="arrow-icon" aria-hidden="true"
-              ></span></a
+            }<a href="/cv.pdf"
+              >CV <span class="arrow-icon" aria-hidden="true"></span></a
             >
           </div>
         </div>
