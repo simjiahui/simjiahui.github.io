@@ -1,0 +1,86 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeading from "../components/PageHeading.astro";
+import PublicationItem from "../components/PublicationItem.astro";
+import { academic } from "../data";
+const publications = [...academic.publications].sort((a, b) =>
+  b.date.localeCompare(a.date),
+);
+const years = [
+  ...new Set(
+    publications.filter((p) => !p.placeholder).map((p) => p.date.slice(0, 4)),
+  ),
+]
+  .sort()
+  .reverse();
+---
+
+<Layout
+  title="Publications & talks"
+  description="Publications, preprints, posters, and academic talks. Verified records and downloadable citations."
+>
+  <div class="cream">
+    <PageHeading
+      eyebrow="02 / Publications & talks"
+      title="Ideas, shared"
+      description="Papers, preprints, presentations, and the conversations they begin. Every real entry here comes from a single shared academic record."
+    />
+    <section class="container page-section" aria-label="Publication records">
+      <div class="filter-bar" data-publication-filters hidden>
+        <label
+          >Type<select id="publication-type"
+            ><option value="all">All types</option><option value="journal"
+              >Journal papers</option
+            ><option value="conference">Conference papers</option><option
+              value="preprint">Preprints</option
+            ><option value="poster">Posters</option><option value="talk"
+              >Talks</option
+            ><option value="seminar">Invited seminars</option></select
+          ></label
+        ><label
+          >Year<select id="publication-year"
+            ><option value="all">All years</option>{
+              years.map((y) => <option value={y}>{y}</option>)
+            }{
+              publications.some((p) => p.placeholder) && (
+                <option value="sample">Sample only</option>
+              )
+            }</select
+          ></label
+        ><p
+          class="filter-count"
+          role="status"
+          aria-live="polite"
+          data-publication-count
+        >
+        </p>
+      </div>
+      <div>
+        {publications.map((p) => <PublicationItem publication={p} />)}
+      </div><p class="empty-state" data-publication-empty hidden>
+        No records match these filters. Try another type or year.
+      </p>
+      {
+        !publications.some((p) => !p.placeholder) && (
+          <aside class="note-box">
+            <>
+              <h2>A bibliography waiting for your work</h2>
+              <p>
+                No verified citations have been supplied yet. The clearly
+                labeled example is a layout demonstration, not a publication
+                claim. Real publications and talks will also appear in the
+                automatically generated CV.
+              </p>
+            </>
+          </aside>
+        )
+      }
+      <p class="content-note">
+        Looking for a complete academic overview? <a href="/cv/"
+          >View the curriculum vitae <span class="arrow-icon" aria-hidden="true"
+          ></span></a
+        >
+      </p>
+    </section>
+  </div>
+</Layout>

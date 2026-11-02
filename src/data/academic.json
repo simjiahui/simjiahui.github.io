@@ -1,0 +1,24 @@
+{
+  "education": [],
+  "experience": [],
+  "publications": [
+    {
+      "id": "sample-publication",
+      "type": "preprint",
+      "title": "Your publication title will appear here",
+      "authors": ["Your name", "Co-author placeholder"],
+      "venue": "Venue to be added",
+      "date": "2026-01-01",
+      "status": "Placeholder — replace with verified metadata",
+      "placeholder": true,
+      "featured": true,
+      "themes": ["reservoir"],
+      "doi": "",
+      "arxiv": "",
+      "pdf": "",
+      "code": "",
+      "slides": "",
+      "bibtex": ""
+    }
+  ]
+}

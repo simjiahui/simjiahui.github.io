@@ -1,0 +1,57 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeading from "../components/PageHeading.astro";
+import { academic, profile } from "../data";
+const real = academic.publications.filter((p) => !p.placeholder);
+---
+
+<Layout
+  title="Curriculum vitae"
+  description="A downloadable academic CV generated from the same verified data as this website."
+  ><div class="cream">
+    <PageHeading
+      eyebrow="06 / Curriculum vitae"
+      title="An academic overview"
+      description="A conventional, printable companion to this observatory. Generated automatically from the same academic record used throughout the site."
+    /><section class="container page-section cv-grid">
+      <div>
+        <p class="eyebrow">{profile.institution}</p><h2>{profile.name}</h2><p
+          class="lede"
+        >
+          {profile.role}
+        </p>{
+          profile.nameIsPlaceholder && (
+            <p class="sample-label">
+              Draft CV · name and background details to be added
+            </p>
+          )
+        }<p>
+          The PDF is rebuilt whenever this site is built. Sample publications
+          and projects are excluded, and missing education or employment details
+          are left unclaimed.
+        </p><a class="button button-dark" href="/cv.pdf" download
+          >Download academic CV <span aria-hidden="true">↓ PDF</span></a
+        ><p class="content-note">
+          No verified publication or education history has been assumed.
+        </p>
+      </div><aside class="cv-paper" aria-label="CV contents">
+        <span class="eyebrow">Curriculum vitae</span><h3>{profile.name}</h3><p>
+          {profile.role}<br />{profile.institution}
+        </p><hr /><h4>Research interests</h4><p>
+          Dynamical systems · Reservoir computing · Machine learning · Network
+          topology · Synchronization · Forecasting
+        </p><h4>Shared academic record</h4><p>
+          {academic.education.length} education entries<br />{
+            academic.experience.length
+          } experience entries<br />{
+            real.filter((p) => !["talk", "seminar"].includes(p.type)).length
+          } publications & posters<br />{
+            real.filter((p) => ["talk", "seminar"].includes(p.type)).length
+          } talks & seminars
+        </p><span class="meta"
+          >Automatically generated · freely downloadable</span
+        >
+      </aside>
+    </section>
+  </div></Layout
+>

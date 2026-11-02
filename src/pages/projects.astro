@@ -1,0 +1,32 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeading from "../components/PageHeading.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { projects } from "../data";
+---
+
+<Layout
+  title="Projects"
+  description="A curated collection of research software, experiments, and mathematical explorations."
+  ><div class="dark">
+    <PageHeading
+      eyebrow="03 / Projects"
+      title="Theory, made tangible"
+      description="A curated home for research software, small experiments, and reproducible ideas. Selected with care, rather than collected automatically."
+    /><section
+      class="container page-section project-list"
+      aria-label="Curated projects"
+    >
+      {
+        projects.map((project) => (
+          <div id={project.id}>
+            <ProjectCard project={project} />
+          </div>
+        ))
+      }<p class="content-note">
+        Sample projects demonstrate the layout. No repository has been presented
+        as completed research.
+      </p>
+    </section>
+  </div></Layout
+>

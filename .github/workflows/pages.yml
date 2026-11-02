@@ -1,0 +1,59 @@
+name: Check & deploy Moonlit Tides
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  ASTRO_TELEMETRY_DISABLED: "1"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and upload with official Astro Pages action
+        uses: withastro/action@v3
+        with:
+          node-version: "24"
+      - name: Check TypeScript and content schemas
+        run: npm run check
+      - name: Check formatting
+        run: npm run lint
+      - name: Test astronomy, tides, content, and workflow
+        run: npm test
+      - name: Install browser for smoke tests
+        run: npx playwright install --with-deps chromium
+      - name: Test responsive layout, accessibility, and reduced motion
+        run: npm run test:browser
+      - name: Save screenshots and browser report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-checks
+          path: artifacts/
+          if-no-files-found: ignore
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

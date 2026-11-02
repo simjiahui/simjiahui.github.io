@@ -1,0 +1,41 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { formatDate } from "../data";
+interface Props {
+  post: CollectionEntry<"journal">;
+}
+const { post } = Astro.props;
+---
+
+<article class="post-card" data-post data-category={post.data.category}>
+  {
+    post.data.cover && (
+      <a
+        class="post-cover"
+        href={`/journal/${post.id}/`}
+        tabindex="-1"
+        aria-hidden="true"
+      >
+        <img
+          src={post.data.cover}
+          alt=""
+          width="900"
+          height="540"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+    )
+  }
+  <div class="post-meta">
+    <span>{post.data.category}</span><time
+      datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time
+    >
+  </div>
+  <h3><a href={`/journal/${post.id}/`}>{post.data.title}</a></h3>
+  <p>{post.data.description}</p>{
+    post.data.sample && (
+      <span class="sample-label">Sample article · illustrative content</span>
+    )
+  }
+</article>

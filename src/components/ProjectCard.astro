@@ -1,0 +1,66 @@
+---
+import type { projects as projectData } from "../data";
+import { academic } from "../data";
+import { repositoryMetadata } from "../lib/github";
+interface Props {
+  project: (typeof projectData)[number];
+}
+const { project: p } = Astro.props;
+const metadata = p.repository ? await repositoryMetadata(p.repository) : null;
+const publication = academic.publications.find(
+  (pub) => pub.id === p.publication,
+);
+---
+
+<article class="project-card">
+  <div class="project-art">
+    {
+      p.image && (
+        <img
+          src={p.image}
+          alt={`Illustration for ${p.title}`}
+          width="900"
+          height="540"
+          loading="lazy"
+          decoding="async"
+        />
+      )
+    }{p.placeholder && <span class="art-label">Sample project</span>}
+  </div>
+  <div class="project-copy">
+    <p class="eyebrow">
+      {p.placeholder ? "Your work, thoughtfully curated" : "Research software"}
+    </p><h3>{p.title}</h3><p>{p.description}</p><ul
+      class="tags"
+      aria-label="Technologies"
+    >
+      {p.technologies.map((t) => <li>{t}</li>)}
+    </ul><div class="inline-links">
+      {
+        p.repository && (
+          <a href={p.repository}>
+            Repository <span class="arrow-icon" aria-hidden="true" />
+          </a>
+        )
+      }{
+        p.demo && (
+          <a href={p.demo}>
+            Live demo <span class="arrow-icon" aria-hidden="true" />
+          </a>
+        )
+      }{
+        publication && (
+          <a href={`/publications/#${publication.id}`}>
+            Related publication <span class="arrow-icon" aria-hidden="true" />
+          </a>
+        )
+      }
+    </div>{
+      metadata && (
+        <p class="meta">
+          {metadata.language ?? "Public repository"} · {metadata.stars} stars
+        </p>
+      )
+    }
+  </div>
+</article>

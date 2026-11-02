@@ -1,0 +1,72 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeading from "../components/PageHeading.astro";
+---
+
+<Layout
+  title="About the observatory"
+  description="How the lunar phase, lunisolar calendar, and artistic ASCII ocean are calculated."
+  ><div class="cream">
+    <PageHeading
+      eyebrow="Behind the scenes"
+      title="A small observatory"
+      description="A note on the real calculations, imagined currents, and quiet choices that make this website."
+    /><div class="prose page-section">
+      <section id="lunar-scene">
+        <h2>The moon is real. The sea is imagined.</h2><p>
+          Astronomy Engine calculates the current Sun–Moon elongation,
+          illuminated fraction, and topocentric moon coordinates. Waxing and
+          waning are derived from the full 0–360° phase angle. The reference
+          location is Sendai, Japan: 38.2682° N, 140.8694° E, elevation 0 m.
+        </p><p>
+          The ASCII disc is a procedural sphere with illustrative crater
+          texture. It represents the real lunar phase, not a photographic lunar
+          map. Its placement is composed for the page, rather than projected
+          from the reference sky. Its phase orientation is fixed north-up; local
+          sky rotation and libration are not rendered. The reference altitude
+          and azimuth are available in the homepage observation notes.
+        </p><h3>Two clocks, clearly separated</h3><p>
+          Lunar phase follows real-world time and is recalculated every minute
+          while the page is visible. The sea’s conceptual lunar and solar
+          constituents use periods of 12.4206 and 12 solar hours, accelerated
+          2,400 times so their movement can be seen. Three traveling waves add
+          swell, cross-wave interference, and ripples. A reflection field
+          follows the artistic moon placement and illumination.
+        </p><p>
+          This is an artistic visualization. It is not calibrated to a
+          coastline, has no physical water-level units, and must not be used for
+          navigation or tide predictions. Real tides require local bathymetry,
+          coastline geometry, and measured harmonic constituents.
+        </p><h3>The calendar</h3><p>
+          Calendar dates use China / Malaysia time (UTC+8), independent of your
+          device’s timezone. The open-source lunar-javascript library converts
+          those civil dates to the Chinese lunisolar calendar. A small festival
+          registry recognizes Lunar New Year and Mid-Autumn Festival, excluding
+          leap months.
+        </p><h3>A quieter mode</h3><p>
+          The renderer targets 30 frames per second, caps pixel density, lowers
+          the character count on small screens, and adapts if drawing is too
+          costly. It pauses in hidden tabs and when the scene leaves the
+          viewport. Reduced-motion preferences produce a still scene. Without
+          JavaScript or Canvas, a pre-rendered ASCII snapshot remains visible;
+          its date reflects the last site build.
+        </p>
+      </section><h2>Made to be kept</h2><p>
+        This is a static Astro website hosted on GitHub Pages. Fonts are bundled
+        locally: Cormorant Garamond and DM Sans (SIL Open Font License). There
+        are no required paid APIs, cookies, analytics, or tracking scripts.
+        Public GitHub metadata, when configured, is fetched only during builds
+        and can fail without breaking the site.
+      </p><p>
+        Placeholder entries are labeled and are excluded from the generated
+        academic CV. The PDF uses PDFKit, an open-source generator, and shares
+        its academic data with the website.
+      </p><p>
+        <a href="https://github.com/simjiahui/simjiahui.github.io"
+          >Explore the source <span class="arrow-icon" aria-hidden="true"
+          ></span></a
+        >
+      </p>
+    </div>
+  </div></Layout
+>
