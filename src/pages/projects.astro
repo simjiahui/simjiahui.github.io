@@ -1,21 +1,24 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import RichText from "../components/RichText.astro";
+import { siteContent, plain } from "../data/siteContent";
 import PageHeading from "../components/PageHeading.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import { projects } from "../data";
+const copy = siteContent.projects;
 ---
 
 <Layout
-  title="Projects"
-  description="A curated collection of research software, experiments, and mathematical explorations."
+  title={plain(copy.meta.title)}
+  description={plain(copy.meta.description)}
   ><div class="dark">
     <PageHeading
-      eyebrow="03 / Projects"
-      title="Theory, made tangible"
-      description="A curated home for research software, small experiments, and reproducible ideas. Selected with care, rather than collected automatically."
+      eyebrow={copy.heading.eyebrow}
+      title={copy.heading.title}
+      description={copy.heading.description}
     /><section
       class="container page-section project-list"
-      aria-label="Curated projects"
+      aria-label={plain(copy.listLabel)}
     >
       {
         projects.map((project) => (
@@ -24,8 +27,7 @@ import { projects } from "../data";
           </div>
         ))
       }<p class="content-note">
-        Sample projects demonstrate the layout. No repository has been presented
-        as completed research.
+        <RichText text={copy.sampleNote} />
       </p>
     </section>
   </div></Layout

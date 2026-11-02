@@ -1,16 +1,19 @@
 ---
 import type { Publication } from "../data/schema";
+import RichText from "../components/RichText.astro";
+import { siteContent } from "../data/siteContent";
 import { profile, formatDate } from "../data";
 interface Props {
   publication: Publication;
 }
 const { publication: p } = Astro.props;
+const copy = siteContent.publications.card;
 const links = [
-  { label: "DOI", url: p.doi ? `https://doi.org/${p.doi}` : "" },
-  { label: "arXiv", url: p.arxiv ? `https://arxiv.org/abs/${p.arxiv}` : "" },
-  { label: "PDF", url: p.pdf },
-  { label: "Code", url: p.code },
-  { label: "Slides", url: p.slides },
+  { label: copy.doi, url: p.doi ? `https://doi.org/${p.doi}` : "" },
+  { label: copy.arxiv, url: p.arxiv ? `https://arxiv.org/abs/${p.arxiv}` : "" },
+  { label: copy.pdf, url: p.pdf },
+  { label: copy.code, url: p.code },
+  { label: copy.slides, url: p.slides },
 ].filter((l) => l.url);
 ---
 
@@ -18,18 +21,23 @@ const links = [
   class="publication-item"
   id={p.id}
   data-publication
+  data-citation-messages
+  data-copied={copy.copied}
+  data-copy-failed={copy.copyFailed}
   data-type={p.type}
   data-year={p.placeholder ? "sample" : p.date.slice(0, 4)}
 >
   <div class="publication-date">
-    <span>{p.placeholder ? "SAMPLE" : p.date.slice(0, 4)}</span><span
-      class="type-label">{p.type}</span
+    <span>{p.placeholder ? copy.sampleYear : p.date.slice(0, 4)}</span><span
+      class="type-label">{copy.types[p.type]}</span
     >
   </div>
   <div class="publication-body">
     {
       p.placeholder && (
-        <span class="sample-label">Placeholder · not a real citation</span>
+        <span class="sample-label">
+          <RichText text={copy.placeholder} />
+        </span>
       )
     }
     <h3>{p.title}</h3>
@@ -66,21 +74,27 @@ const links = [
     }
     {
       p.bibtex && !p.placeholder && (
-        <details class="bibtex">
+        <details
+          class="bibtex"
+          data-copied={copy.copied}
+          data-copy-failed={copy.copyFailed}
+        >
           <>
-            <summary>BibTeX citation</summary>
+            <summary>
+              <RichText text={copy.bibtexSummary} />
+            </summary>
             <pre>
               <code>{p.bibtex}</code>
             </pre>
             <button data-copy={p.bibtex} class="small-button">
-              Copy BibTeX
+              <RichText text={copy.copy} />
             </button>
             <button
               data-download={p.bibtex}
               data-filename={`${p.id}.bib`}
               class="small-button"
             >
-              Download .bib
+              <RichText text={copy.download} />
             </button>
             <span class="copy-status" role="status" />
           </>

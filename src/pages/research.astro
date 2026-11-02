@@ -1,20 +1,23 @@
 ---
 import katex from "katex";
+import RichText from "../components/RichText.astro";
+import { siteContent, plain } from "../data/siteContent";
 import Layout from "../layouts/Layout.astro";
 import PageHeading from "../components/PageHeading.astro";
 import { themes } from "../data/themes";
 import { academic, projects } from "../data";
+const copy = siteContent.research;
 ---
 
 <Layout
-  title="Research"
-  description="Research themes in reservoir computing, nonlinear dynamics, network geometry, and time-series forecasting."
+  title={plain(copy.meta.title)}
+  description={plain(copy.meta.description)}
 >
   <div class="cream">
     <PageHeading
-      eyebrow="01 / Research"
-      title="Patterns worth following"
-      description="At the meeting point of applied mathematics and machine learning: questions about memory, connection, and collective behavior."
+      eyebrow={copy.heading.eyebrow}
+      title={copy.heading.title}
+      description={copy.heading.description}
     />
     <div class="container research-list">
       {
@@ -31,10 +34,14 @@ import { academic, projects } from "../data";
                 <div class="research-text">
                   <>
                     <p class="eyebrow">
-                      {theme.number} / {theme.subtitle}
+                      {theme.number} / <RichText text={theme.subtitle} />
                     </p>
-                    <h2>{theme.title}</h2>
-                    <p class="lede">{theme.description}</p>
+                    <h2>
+                      <RichText text={theme.title} />
+                    </h2>
+                    <p class="lede">
+                      <RichText text={theme.description} />
+                    </p>
                     <div
                       class="equation"
                       set:html={katex.renderToString(theme.math, {
@@ -43,9 +50,13 @@ import { academic, projects } from "../data";
                         output: "htmlAndMathml",
                       })}
                     />
-                    <p class="meta">{theme.caption}</p>
+                    <p class="meta">
+                      <RichText text={theme.caption} />
+                    </p>
                     <div class="related-work">
-                      <h3>Related work</h3>
+                      <h3>
+                        <RichText text={copy.relatedHeading} />
+                      </h3>
                       {pubs.length || related.length ? (
                         <ul>
                           {pubs.map((p) => (
@@ -67,8 +78,7 @@ import { academic, projects } from "../data";
                         </ul>
                       ) : (
                         <p class="content-note">
-                          Verified publications and projects will be linked here
-                          when available.
+                          <RichText text={copy.relatedEmpty} />
                         </p>
                       )}
                     </div>
@@ -78,13 +88,15 @@ import { academic, projects } from "../data";
                   <>
                     <img
                       src={theme.image}
-                      alt={`Conceptual illustration of ${theme.title.toLowerCase()}`}
+                      alt={plain(copy.illustrationAlt, {
+                        title: plain(theme.title).toLowerCase(),
+                      })}
                       width="900"
                       height="540"
                       loading="lazy"
                     />
                     <figcaption>
-                      Conceptual illustration, not experimental data.
+                      <RichText text={copy.illustrationCaption} />
                     </figcaption>
                   </>
                 </figure>

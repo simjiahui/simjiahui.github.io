@@ -12,6 +12,69 @@ You can maintain the website using GitHub in your browser. No terminal is needed
 
 Content JSON and Markdown are validated for correctness without imposing a formatting style. You can use normal GitHub editing. Formatting checks apply to application source; changing those files is optional developer work, not part of routine content updates.
 
+## Change website wording — start with this file
+
+Open **`src/data/siteContent.json`** in GitHub and click the pencil icon. This is the central place for page headings, subtitles, paragraphs, section descriptions, button labels, empty-state messages, filter labels, and shared footer text. You do not need to edit `.astro`, `.ts`, CSS, or HTML files to change this wording.
+
+Use GitHub's file search (**Ctrl+F** / **⌘F**) to find the sentence you see on the website, change only the text between its quotation marks, and save it on a new branch/pull request. Keep the JSON keys, commas, brackets, and quotation marks in place. Preview the change in the browser-check screenshots attached to the Actions run; merge after the checks and your review pass.
+
+| What you want to change                                                                       | Section in `siteContent.json`              |
+| --------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| Biography and short personal note used on Home and About                                      | `shared.biography`, `shared.biographyNote` |
+| Lunar hero subtitle, introduction, buttons, scroll cue, observation notes                     | `hero`                                     |
+| Homepage introduction, section headings, links, and contact invitation                        | `home`                                     |
+| About introduction, research journey, background headings, gallery placeholders, contact copy | `about`                                    |
+| Research page introduction and each theme's title, subtitle, description, equation, caption   | `research` and `research.themes`           |
+| Publications page introduction, filters, empty states, citation buttons/messages              | `publications`                             |
+| Projects page introduction and shared project-card labels                                     | `projects`                                 |
+| Journal introduction, category display labels, filters, article footer, RSS descriptions      | `journal`                                  |
+| Shared footer, menu/accessibility labels, default site description                            | `shared`                                   |
+| CV overview page, 404, and observatory explanation                                            | `cv`, `notFound`, `colophon`               |
+
+The current defaults preserve the website's existing wording, including your latest biography and “I love learning!” note. **Biography and biography-note fields have moved from `profile.json` to `siteContent.json`**; edit them in their new home from now on.
+
+### Line breaks and italics, without HTML
+
+Headings and static paragraphs support two simple conventions:
+
+- Type `\n` inside a JSON string to insert a line break. Keep the string on one line in the file; do not press Enter inside its quotation marks.
+- Put one asterisk on each side of words for italic emphasis: `*these words*`.
+
+For example, the homepage introduction heading is:
+
+```json
+"heading": "Curiosity at the edge\nof *complexity.*"
+```
+
+It displays as “Curiosity at the edge” on the first line, then “of complexity.” with “complexity.” italicized on the next. You can change it to:
+
+```json
+"heading": "Questions about\n*learning and dynamics.*"
+```
+
+Use `*single asterisks*`, not double asterisks, and keep each italic phrase on one side of a line break. HTML tags such as `<br>` or `<em>` are not needed; they display as ordinary text. Metadata, counts, and plain dropdown labels remain plain text, so use ordinary wording there. If you need a quotation mark inside a sentence, write `\"` in the JSON string.
+
+### Keep automatic values and relationships intact
+
+Some wording contains values such as `{name}`, `{role}`, `{institution}`, `{percent}`, or `{count}`. Keep those tokens spelled exactly as shown: the website fills them from your profile, astronomical calculations, or filtered records. Edit the surrounding words freely. For example, `"{count} records"` can become `"{count} research entries"`.
+
+In `research.themes`, edit titles/descriptions/captions freely, but keep each `id` stable so related publications and project links continue to work. Equations use the existing LaTeX `math` field, with backslashes escaped for JSON; changing mathematical notation does not require an Astro component edit. In `journal.categories`, edit `label` to change what visitors see, and keep `value` unchanged so article categories and filters still match.
+
+The observation notes and colophon describe real calculations: editing their text does not change the animation’s reference location or model. Keep those scientific statements accurate.
+
+The configuration is validated during every build. Missing keys, misspelled placeholders, invalid types, and duplicate theme/category identifiers fail the checks with a field path. If checks fail after an edit, fix the indicated field in the same branch. No part of the new wording is published until the build passes and the pull request is merged.
+
+### Which other files still hold content?
+
+`siteContent.json` holds **page wording**, while the existing data files retain the content they share with other features:
+
+- `src/data/profile.json`: name, academic role, institution, location, email, interests, photographs, professional links, site title, and navigation destinations/labels. These facts still feed the website and CV.
+- `src/data/academic.json`: real education, experience, publication, poster, and talk records, shared with the PDF CV.
+- `src/data/projects.json`: each curated project's title, description, cover, technologies, and links.
+- `src/content/journal/*.md`: individual article titles, summaries, and full article bodies.
+
+These are all browser-editable content files. Application templates and the lunar/ocean simulation stay separate from your wording.
+
 ## 1. Add a publication once, update the site and CV
 
 Open `src/data/academic.json`. The `publications` array holds journal papers, conference papers, preprints, posters, talks, and seminars. Replace the sample with verified information; duplicate its object to add another entry.
@@ -125,7 +188,7 @@ Journal covers support meaningful `coverAlt`; the data-driven gallery supports `
 
 ## 6. Update the biography, education, and experience
 
-Edit `src/data/profile.json` for your name, role, institution, location, biography, biography note, optional email, interests, photographs, and professional links. Set `nameIsPlaceholder: false` only after supplying your name. Leave unknown personal facts empty. Do not enter private information you do not want published.
+Edit `shared.biography` and `shared.biographyNote` in `src/data/siteContent.json` for biography wording. Edit `src/data/profile.json` for your name, role, institution, location, optional email, interests, photographs, and professional links. Set `nameIsPlaceholder: false` only after supplying your name. Leave unknown personal facts empty. Do not enter private information you do not want published.
 
 Education and experience live in `academic.json`. Each entry in either array has:
 
@@ -139,7 +202,7 @@ Education and experience live in `academic.json`. Each entry in either array has
 }
 ```
 
-Replace those illustrative strings with verified information. Education appears on About and in the CV; experience appears on About and in the CV. Research theme copy and equations are in `src/data/themes.ts`; edit the text carefully without removing TypeScript punctuation.
+Replace those illustrative strings with verified information. Education appears on About and in the CV; experience appears on About and in the CV. Research theme copy and equations are in `research.themes` inside `src/data/siteContent.json`; keep the theme IDs and JSON punctuation intact.
 
 ## 7. Regenerate the CV
 
@@ -151,11 +214,11 @@ The default CV uses conventional Times fonts and supports Latin text. For Chines
 
 ## 8. Navigation, site metadata, and social previews
 
-- `src/data/profile.json`: site title, description, navigation labels/paths, professional links, and email. Use full `https://` URLs for external links.
+- `src/data/profile.json`: site title, navigation labels/paths, professional links, and email. The default description is `shared.siteDescription` in `siteContent.json`. Use full `https://` URLs for external links.
 - `astro.config.mjs`: canonical production `site` URL. It is configured for `https://simjiahui.github.io` with root paths. A future project-subpath deployment needs deliberate base-path work; simply changing the repository name is insufficient.
 - `public/favicon.svg`: moon-and-waves favicon.
 - `public/images/og.png`: social preview. Replace it with a 1200×630 PNG if desired. `og.svg` is its editable artwork source; replacing the SVG alone does not regenerate the PNG.
-- `src/layouts/Layout.astro`: shared SEO tags and footer if you need deeper layout changes.
+- `src/data/siteContent.json`: shared footer wording, accessible menu labels, per-page metadata, and introductions. Only structural design changes need application-template edits.
 
 ## First deployment
 

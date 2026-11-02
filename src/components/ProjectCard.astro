@@ -1,5 +1,7 @@
 ---
 import type { projects as projectData } from "../data";
+import RichText from "../components/RichText.astro";
+import { siteContent, plain } from "../data/siteContent";
 import { academic } from "../data";
 import { repositoryMetadata } from "../lib/github";
 interface Props {
@@ -10,6 +12,7 @@ const metadata = p.repository ? await repositoryMetadata(p.repository) : null;
 const publication = academic.publications.find(
   (pub) => pub.id === p.publication,
 );
+const copy = siteContent.projects.card;
 ---
 
 <article class="project-card">
@@ -18,47 +21,57 @@ const publication = academic.publications.find(
       p.image && (
         <img
           src={p.image}
-          alt={`Illustration for ${p.title}`}
+          alt={plain(copy.imageAlt, { title: p.title })}
           width="900"
           height="540"
           loading="lazy"
           decoding="async"
         />
       )
-    }{p.placeholder && <span class="art-label">Sample project</span>}
+    }{
+      p.placeholder && (
+        <span class="art-label">
+          <RichText text={copy.sample} />
+        </span>
+      )
+    }
   </div>
   <div class="project-copy">
     <p class="eyebrow">
-      {p.placeholder ? "Your work, thoughtfully curated" : "Research software"}
+      <RichText text={p.placeholder ? copy.sampleEyebrow : copy.eyebrow} />
     </p><h3>{p.title}</h3><p>{p.description}</p><ul
       class="tags"
-      aria-label="Technologies"
+      aria-label={plain(copy.technologiesLabel)}
     >
       {p.technologies.map((t) => <li>{t}</li>)}
     </ul><div class="inline-links">
       {
         p.repository && (
           <a href={p.repository}>
-            Repository <span class="arrow-icon" aria-hidden="true" />
+            <RichText text={copy.repository} />{" "}
+            <span class="arrow-icon" aria-hidden="true" />
           </a>
         )
       }{
         p.demo && (
           <a href={p.demo}>
-            Live demo <span class="arrow-icon" aria-hidden="true" />
+            <RichText text={copy.demo} />{" "}
+            <span class="arrow-icon" aria-hidden="true" />
           </a>
         )
       }{
         publication && (
           <a href={`/publications/#${publication.id}`}>
-            Related publication <span class="arrow-icon" aria-hidden="true" />
+            <RichText text={copy.publication} />{" "}
+            <span class="arrow-icon" aria-hidden="true" />
           </a>
         )
       }
     </div>{
       metadata && (
         <p class="meta">
-          {metadata.language ?? "Public repository"} · {metadata.stars} stars
+          {metadata.language ?? copy.publicRepository} ·{" "}
+          <RichText text={copy.stars} variables={{ count: metadata.stars }} />
         </p>
       )
     }

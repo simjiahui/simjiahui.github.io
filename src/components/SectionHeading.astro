@@ -1,18 +1,29 @@
 ---
+import RichText from "../components/RichText.astro";
+import { siteContent } from "../data/siteContent";
 interface Props {
   eyebrow: string;
   title: string;
   href?: string;
   link?: string;
 }
-const { eyebrow, title, href, link = "Explore more" } = Astro.props;
+const {
+  eyebrow,
+  title,
+  href,
+  link = siteContent.shared.sectionLink,
+} = Astro.props;
 ---
 
 <div class="section-heading">
-  <div><p class="eyebrow">{eyebrow}</p><h2>{title}</h2></div>{
+  <div>
+    <p class="eyebrow"><RichText text={eyebrow} /></p><h2>
+      <RichText text={title} />
+    </h2>
+  </div>{
     href && (
       <a class="text-link" href={href}>
-        {link}{" "}
+        <RichText text={link} />{" "}
         <span aria-hidden="true">
           <span class="arrow-icon" aria-hidden="true" />
         </span>

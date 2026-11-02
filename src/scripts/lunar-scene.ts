@@ -1,3 +1,4 @@
+import { interpolate } from "../lib/copy";
 import type { MoonState } from "../lib/astronomy";
 import {
   GLYPHS,
@@ -269,16 +270,29 @@ if (canvas) {
       set("[data-phase]", state.phase);
       set(
         "[data-illumination]",
-        `${Math.round(state.fraction * 100)}% illuminated`,
+        interpolate(
+          document.querySelector<HTMLElement>("[data-illumination]")!.dataset
+            .template!,
+          { percent: Math.round(state.fraction * 100) },
+        ),
       );
       set("[data-lunar-date]", state.calendar.label);
       set(
         "[data-festival]",
-        state.calendar.festival ?? "A quiet moment under the same moon.",
+        state.calendar.festival ??
+          document.querySelector<HTMLElement>("[data-festival]")!.dataset
+            .fallback!,
       );
       set(
         "[data-moon-position]",
-        `${state.altitude.toFixed(1)}° altitude · ${state.azimuth.toFixed(1)}° azimuth`,
+        interpolate(
+          document.querySelector<HTMLElement>("[data-moon-position]")!.dataset
+            .template!,
+          {
+            altitude: state.altitude.toFixed(1),
+            azimuth: state.azimuth.toFixed(1),
+          },
+        ),
       );
       set(
         "[data-observation-time]",

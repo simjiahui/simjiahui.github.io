@@ -33,6 +33,8 @@ jobs:
         run: npm test
       - name: Install browser for smoke tests
         run: npx playwright install --with-deps chromium
+      - name: Verify JSON-only content editing
+        run: npm run test:content-edit
       - name: Test responsive layout, accessibility, and reduced motion
         run: npm run test:browser
       - name: Save screenshots and browser report

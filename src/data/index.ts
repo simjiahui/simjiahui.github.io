@@ -8,14 +8,11 @@ export const profile = z
     name: z.string().min(1),
     nameIsPlaceholder: z.boolean(),
     siteTitle: z.string(),
-    description: z.string(),
     role: z.string(),
     institution: z.string(),
     location: z.string(),
     email: z.union([z.literal(""), z.email()]),
     portrait: z.string(),
-    biography: z.string(),
-    biographyNote: z.string(),
     interests: z.array(z.string()),
     links: z.array(
       z.object({

@@ -1,20 +1,25 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import RichText from "../components/RichText.astro";
+import { siteContent, plain } from "../data/siteContent";
+const copy = siteContent.notFound;
 ---
 
-<Layout title="Page not found" noindex
+<Layout title={plain(copy.title)} noindex
   ><section class="cream not-found container">
-    <p class="eyebrow">404 / A little off course</p><span
+    <p class="eyebrow"><RichText text={copy.eyebrow} /></p><span
       class="lost-moon"
       aria-hidden="true">☾</span
-    ><h1>This tide leads<br /><em>somewhere else.</em></h1><p>
-      The page you are looking for may have moved, or may still be taking shape.
+    ><h1><RichText text={copy.heading} /></h1><p>
+      <RichText text={copy.description} />
     </p><a class="button button-dark" href="/"
-      >Back to the observatory <span class="arrow-icon" aria-hidden="true"
-      ></span></a
+      ><RichText text={copy.homeLink} />{" "}<span
+        class="arrow-icon"
+        aria-hidden="true"></span></a
     ><a class="text-link" href="/journal/"
-      >Or wander through the journal <span class="arrow-icon" aria-hidden="true"
-      ></span></a
+      ><RichText text={copy.journalLink} />{" "}<span
+        class="arrow-icon"
+        aria-hidden="true"></span></a
     >
   </section></Layout
 >
