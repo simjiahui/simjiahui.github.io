@@ -1,4 +1,6 @@
 ---
+import RichText from "../components/RichText.astro";
+import { siteContent } from "../data/siteContent";
 interface Props {
   eyebrow: string;
   title: string;
@@ -8,9 +10,11 @@ const { eyebrow, title, description } = Astro.props;
 ---
 
 <div class="page-heading container">
-  <p class="eyebrow">{eyebrow}</p><h1>{title}<span class="pink">.</span></h1><p
-    class="lede"
-  >
-    {description}
+  <p class="eyebrow"><RichText text={eyebrow} /></p><h1>
+    <RichText text={title} /><span class="pink"
+      >{siteContent.shared.headingPunctuation}</span
+    >
+  </h1><p class="lede">
+    <RichText text={description} />
   </p>
 </div>

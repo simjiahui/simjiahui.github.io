@@ -1,5 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import RichText from "../components/RichText.astro";
+import { siteContent, plain } from "../data/siteContent";
 import PageHeading from "../components/PageHeading.astro";
 import PublicationItem from "../components/PublicationItem.astro";
 import { academic } from "../data";
@@ -13,37 +15,56 @@ const years = [
 ]
   .sort()
   .reverse();
+const copy = siteContent.publications;
 ---
 
 <Layout
-  title="Publications & talks"
-  description="Publications, preprints, posters, and academic talks. Verified records and downloadable citations."
+  title={plain(copy.meta.title)}
+  description={plain(copy.meta.description)}
 >
   <div class="cream">
     <PageHeading
-      eyebrow="02 / Publications & talks"
-      title="Ideas, shared"
-      description="Papers, preprints, presentations, and the conversations they begin. Every real entry here comes from a single shared academic record."
+      eyebrow={copy.heading.eyebrow}
+      title={copy.heading.title}
+      description={copy.heading.description}
     />
-    <section class="container page-section" aria-label="Publication records">
-      <div class="filter-bar" data-publication-filters hidden>
+    <section
+      class="container page-section"
+      aria-label={plain(copy.recordsLabel)}
+    >
+      <div
+        class="filter-bar"
+        data-publication-filters
+        data-count-one={copy.filters.one}
+        data-count-many={copy.filters.many}
+        hidden
+      >
         <label
-          >Type<select id="publication-type"
-            ><option value="all">All types</option><option value="journal"
-              >Journal papers</option
-            ><option value="conference">Conference papers</option><option
-              value="preprint">Preprints</option
-            ><option value="poster">Posters</option><option value="talk"
-              >Talks</option
-            ><option value="seminar">Invited seminars</option></select
+          ><RichText text={copy.filters.type} /><select id="publication-type"
+            ><option value="all"
+              ><RichText text={copy.filters.allTypes} /></option
+            ><option value="journal"
+              ><RichText text={copy.filters.journal} /></option
+            ><option value="conference"
+              ><RichText text={copy.filters.conference} /></option
+            ><option value="preprint"
+              ><RichText text={copy.filters.preprint} /></option
+            ><option value="poster"
+              ><RichText text={copy.filters.poster} /></option
+            ><option value="talk"><RichText text={copy.filters.talk} /></option
+            ><option value="seminar"
+              ><RichText text={copy.filters.seminar} /></option
+            ></select
           ></label
         ><label
-          >Year<select id="publication-year"
-            ><option value="all">All years</option>{
-              years.map((y) => <option value={y}>{y}</option>)
-            }{
+          ><RichText text={copy.filters.year} /><select id="publication-year"
+            ><option value="all"
+              ><RichText text={copy.filters.allYears} /></option
+            >{years.map((y) => <option value={y}>{y}</option>)}{
               publications.some((p) => p.placeholder) && (
-                <option value="sample">Sample only</option>
+                <option value="sample">
+                  <RichText text={copy.filters.sampleYear} />
+                </option>
               )
             }</select
           ></label
@@ -58,27 +79,28 @@ const years = [
       <div>
         {publications.map((p) => <PublicationItem publication={p} />)}
       </div><p class="empty-state" data-publication-empty hidden>
-        No records match these filters. Try another type or year.
+        <RichText text={copy.noMatches} />
       </p>
       {
         !publications.some((p) => !p.placeholder) && (
           <aside class="note-box">
             <>
-              <h2>A bibliography waiting for your work</h2>
+              <h2>
+                <RichText text={copy.emptyHeading} />
+              </h2>
               <p>
-                No verified citations have been supplied yet. The clearly
-                labeled example is a layout demonstration, not a publication
-                claim. Real publications and talks will also appear in the
-                automatically generated CV.
+                <RichText text={copy.emptyParagraph} />
               </p>
             </>
           </aside>
         )
       }
       <p class="content-note">
-        Looking for a complete academic overview? <a href="/cv.pdf"
-          >View the curriculum vitae <span class="arrow-icon" aria-hidden="true"
-          ></span></a
+        <RichText text={copy.cvPrompt} />
+        <a href="/cv.pdf"
+          ><RichText text={copy.cvLink} />{" "}<span
+            class="arrow-icon"
+            aria-hidden="true"></span></a
         >
       </p>
     </section>

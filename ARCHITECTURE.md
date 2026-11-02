@@ -24,6 +24,14 @@ public/           Static illustrations, favicon, social image, user images, gene
 .github/          GitHub Actions validation and Pages deployment
 ```
 
+## Browser-editable page wording
+
+`src/data/siteContent.json` centralizes page wording, shared labels/messages, biography, and research-theme text. `siteContent.ts` applies an explicit strict Zod schema, validates stable identities/placeholders, and exposes shared profile interpolation. `RichText.astro` emits only text nodes, `<br>`, and `<em>` from a tiny newline/single-asterisk syntax; it adds no wrapper and never parses user-authored HTML. Metadata uses a plain-text projection. Scientific formulas keep their existing build-time KaTeX path.
+
+Filter counts, citation feedback, and dynamic lunar readouts receive their text templates through data attributes, so client updates retain edited wording without bundling the complete content catalog. Identity/links remain in `profile.json`; academic records, curated projects, and Markdown articles retain their single existing sources. Styles, routing, astronomical calculations, and renderer behavior are unchanged.
+
+`npm run test:content-edit` temporarily changes only JSON to exercise the actual built site, including heading emphasis/line breaks, safe literal HTML, shared research labels, lunar updates, and filter messages. It restores the original bytes and rebuilds defaults in cleanup. `scripts/content-check.ts --record` / `scripts/content-check.ts` records/compares the default DOM and geometry across ten routes at desktop/mobile widths for this refactor; this optional baseline is not imposed on routine edits that intentionally change copy.
+
 ## One academic record
 
 `src/data/index.ts` validates the JSON using Zod. Publications, talks, and posters use one schema. Types and years drive filters; exact author-name matching highlights the site owner. Invalid dates, unsafe link schemes, duplicate academic IDs, and missing related-publication IDs fail the build. Empty optional metadata stays empty. Placeholders carry an explicit flag and are excluded from the CV and real related-work lists.

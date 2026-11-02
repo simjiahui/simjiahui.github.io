@@ -1,5 +1,7 @@
 ---
 import { profile } from "../data";
+import RichText from "../components/RichText.astro";
+import { siteContent, plain } from "../data/siteContent";
 import "@fontsource/cormorant-garamond/latin-400.css";
 import "@fontsource/cormorant-garamond/latin-400-italic.css";
 import "@fontsource/cormorant-garamond/latin-500.css";
@@ -17,7 +19,7 @@ interface Props {
 }
 const {
   title,
-  description = profile.description,
+  description = plain(siteContent.shared.siteDescription),
   image = "/images/og.png",
   article = false,
   noindex = false,
@@ -29,6 +31,7 @@ const canonical = new URL(
 const pageTitle = title
   ? `${title} · ${profile.siteTitle}`
   : `${profile.siteTitle} · ${profile.role}`;
+const copy = siteContent.shared;
 ---
 
 <!doctype html>
@@ -45,7 +48,7 @@ const pageTitle = title
     <link
       rel="alternate"
       type="application/rss+xml"
-      title="Moonlit Tides Journal"
+      title={plain(copy.rssAlternateTitle)}
       href="/rss.xml"
     />
     <meta property="og:type" content={article ? "article" : "website"} />
@@ -53,26 +56,25 @@ const pageTitle = title
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(image, Astro.site)} />
-    <meta
-      property="og:image:alt"
-      content="Moonlit Tides — a personal academic observatory"
-    />
+    <meta property="og:image:alt" content={plain(copy.socialImageAlt)} />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main"><RichText text={copy.skipLink} /></a>
     <header class="site-header">
       <div class="nav-wrap">
-        <a class="wordmark" href="/" aria-label={`${profile.name} home`}
+        <a class="wordmark" href="/" aria-label={plain(copy.homeLabel)}
           >{profile.name}</a
         >
         <button
           class="menu-toggle"
           aria-expanded="false"
           aria-controls="primary-nav"
-          hidden>Menu <span aria-hidden="true">＋</span></button
+          hidden
+          ><RichText text={copy.menu} />{" "}<span aria-hidden="true">＋</span
+          ></button
         >
-        <nav id="primary-nav" aria-label="Main navigation">
+        <nav id="primary-nav" aria-label={plain(copy.navigationLabel)}>
           {
             profile.navigation.map((link) => (
               <a
@@ -100,12 +102,13 @@ const pageTitle = title
       <div class="container footer-grid">
         <div>
           <a class="wordmark" href="/">{profile.name}</a><p>
-            A personal observatory beside the ocean.<br />Dynamics, learning,
-            and a little wonder.
+            <RichText text={copy.footer.description} />
           </p>
         </div>
         <div>
-          <p class="eyebrow">Find me elsewhere</p><div class="footer-links">
+          <p class="eyebrow">
+            <RichText text={copy.footer.linksHeading} />
+          </p><div class="footer-links">
             {
               profile.links.map((link) => (
                 <a href={link.url}>
@@ -115,11 +118,14 @@ const pageTitle = title
             }{
               profile.email && (
                 <a href={`mailto:${profile.email}`}>
-                  Email <span class="arrow-icon" aria-hidden="true" />
+                  <RichText text={copy.emailLabel} />{" "}
+                  <span class="arrow-icon" aria-hidden="true" />
                 </a>
               )
             }<a href="/cv.pdf"
-              >CV <span class="arrow-icon" aria-hidden="true"></span></a
+              ><RichText text={copy.cvLabel} />{" "}<span
+                class="arrow-icon"
+                aria-hidden="true"></span></a
             >
           </div>
         </div>
@@ -128,9 +134,9 @@ const pageTitle = title
         <span
           >© {new Date().getUTCFullYear()}{" "}
           {profile.nameIsPlaceholder ? profile.siteTitle : profile.name}</span
-        ><span>Made with curiosity. No cookies, no tracking.</span><a
+        ><span><RichText text={copy.footer.privacy} /></span><a
           href="/colophon/"
-          >About this little observatory <span
+          ><RichText text={copy.footer.colophonLink} />{" "}<span
             class="arrow-icon"
             aria-hidden="true"></span></a
         >

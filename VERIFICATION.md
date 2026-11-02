@@ -74,3 +74,22 @@ These are short headless Chromium measurements on this test host, with a simulat
 Visual iteration strengthened blue crest contours and dark troughs, broke the reflection into wave-driven cream glints with rare pink edges, kept the heading area quiet, and gave static mobile snapshots a color-separated moon and sea. The new slow envelope uses actual Sendai Sun/Moon geometry with a 720× artistic clock; it remains explicitly uncalibrated for coastal tide prediction. No video, GIF, remote imagery, new dependency, or paid service was added.
 
 Final animation screenshots and measured results are in `artifacts/lunar-refinement/`; the final full-suite screenshots/report remain in `artifacts/`. No live deployment is implied by these local checks.
+
+## Centralized content editing — 2 November 2026
+
+Page wording now lives in `src/data/siteContent.json`, with an explicit strict schema and safe newline/italic rendering. Existing identity, links, academic records, curated projects, and Markdown articles keep their existing data sources. The latest main-branch defaults (“SIM Jia Hui”, the PhD-student role, biography including causality, and “I love learning!”) were preserved. Biography/note/default description were moved, without rewording, from `profile.json` to the shared section of the content file.
+
+Observed validation:
+
+- `npm run check`: 45 files, zero errors/warnings/hints.
+- `npm test`: 21 tests passed, zero failed/skipped, including safe copy parsing, placeholder interpolation, strict schema failures, and stable research/category identities.
+- `npm run lint`, production build, and 225 local href/src/fragment references passed. The build still produces 11 HTML pages, RSS/sitemap, and the PDF CV.
+- `actionlint` passed for the updated workflow, which now runs the JSON-only authoring check in CI.
+- The default-content comparison passed on 20 route/viewport combinations: ten routes at 1440px and 390px. Normalized wording, element nesting, non-data attributes, and measured geometry matched the pre-refactor production baseline exactly. Astronomical readouts and decorative Canvas/ASCII snapshots were excluded because their real-time state legitimately changes. Added data attributes carry copy templates for client updates.
+- `npm run test:content-edit` changed only JSON, built the real site, and verified new heading text, `<br>`/`<em>` formatting, shared research titles, live lunar display wording, category labels, and singular/plural filter messages. Renaming a publication/category display label did not alter filtering identity. HTML-looking input stayed escaped text and created no DOM element or executable handler. The test restored the original JSON bytes and rebuilt defaults in cleanup.
+- The full `npm run test:browser` suite passed: all 11 axe scans clean, responsive checks at 320/390/768/1440px, mobile keyboard navigation, publication/journal filters, citation copy/downloads, reduced motion, off-screen pausing, no-JavaScript fallback, CV/RSS/sitemap requests, and no browser errors.
+- Before/after homepage and About screenshots were generated, opened, and reviewed. The comparison caught and corrected tiny whitespace differences around inline arrows and heading punctuation.
+
+No CSS, moon texture, wave/tide mathematics, ephemeris calculations, dependency versions, or publication/project/article records were changed. The lunar client script only reads its display strings from data attributes. The browser client does not load the complete content catalog. Results and screenshots are under ignored `artifacts/content-management/` and `artifacts/browser-report.json`.
+
+The refactor is intended for pull-request review; no production deployment is part of this change.

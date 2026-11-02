@@ -1,0 +1,22 @@
+---
+import { parseCopy } from "../lib/copy";
+import { text as interpolate } from "../data/siteContent";
+interface Props {
+  text: string;
+  variables?: Record<string, string | number>;
+}
+const { text, variables } = Astro.props;
+const parts = parseCopy(interpolate(text, variables));
+---
+
+{
+  parts.map((part) =>
+    part.type === "break" ? (
+      <br />
+    ) : part.type === "emphasis" ? (
+      <em>{part.value}</em>
+    ) : (
+      part.value
+    ),
+  )
+}

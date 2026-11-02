@@ -7,7 +7,7 @@ The initial name, publication, project, photographs, and journal examples are ex
 ## Start here — no terminal needed for content
 
 1. Open [CONTENT_GUIDE.md](CONTENT_GUIDE.md) for browser-only editing instructions.
-2. Replace the name and biography in `src/data/profile.json`.
+2. Replace the name in `src/data/profile.json` and edit website wording/biography in `src/data/siteContent.json`.
 3. Add verified academic records to `src/data/academic.json`.
 4. Under repository **Settings → Pages → Build and deployment**, select **GitHub Actions**.
 5. Merge the feature branch into `main`. The workflow validates, builds the CV and site, tests the rendered pages, and deploys to **https://simjiahui.github.io** only if all checks pass.

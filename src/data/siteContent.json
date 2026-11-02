@@ -1,0 +1,367 @@
+{
+  "_editing": "Edit the wording below. See CONTENT_GUIDE.md for line breaks, italics, and {placeholders}. Keep keys unchanged.",
+  "shared": {
+    "biography": "I am a 2nd year PhD student in mathematics at Tohoku University. My research interests span dynamical systems, reservoir computing, machine learning, network topology, synchronization, causality and time-series forecasting.",
+    "biographyNote": "I love learning!",
+    "siteDescription": "A personal observatory for dynamical systems, learning, and the patterns that connect them.",
+    "headingPunctuation": ".",
+    "portraitAlt": "Portrait of {name}",
+    "emailLabel": "Email",
+    "cvLabel": "CV",
+    "sectionLink": "Explore more",
+    "skipLink": "Skip to content",
+    "homeLabel": "{name} home",
+    "menu": "Menu",
+    "navigationLabel": "Main navigation",
+    "rssAlternateTitle": "Moonlit Tides Journal",
+    "socialImageAlt": "Moonlit Tides — a personal academic observatory",
+    "footer": {
+      "description": "A personal observatory beside the ocean.\nDynamics, learning, and a little wonder.",
+      "linksHeading": "Find me elsewhere",
+      "privacy": "Made with curiosity. No cookies, no tracking.",
+      "colophonLink": "About this little observatory"
+    }
+  },
+  "hero": {
+    "eyebrow": "A personal academic observatory",
+    "coordinates": "38.2682° N   140.8694° E",
+    "roleLine": "Applied mathematics · {institution}",
+    "namePlaceholder": "Name placeholder — personalize this space",
+    "subtitle": "Patterns in motion.\n*Possibilities in connection.*",
+    "description": "{role}, exploring dynamical systems, reservoir computing, and the structures behind learning.",
+    "researchButton": "Explore my research",
+    "publicationsButton": "Publications",
+    "cvButton": "CV",
+    "scrollCue": "A little further, a little deeper",
+    "illumination": "{percent}% illuminated",
+    "observation": {
+      "eyebrow": "Under the same moon",
+      "festivalFallback": "A quiet moment under the same moon.",
+      "explanationLink": "Real lunar phase. An imagined sea.",
+      "summary": "Observation notes & calendar",
+      "reference": "Reference sky: Sendai, Japan (38.2682° N, 140.8694° E). ",
+      "position": "{altitude}° altitude · {azimuth}° azimuth",
+      "calendar": ". Calendar: China / Malaysia time (UTC+8). Calculated ",
+      "snapshot": " UTC+8; updates each minute when JavaScript is available. Without JavaScript, the scene is a build-time snapshot.",
+      "artisticNote": "The displayed disc has a fixed artistic placement and north-up phase orientation. It is not a live sky map. Ocean motion is accelerated and does not predict coastal tides."
+    }
+  },
+  "home": {
+    "introduction": {
+      "eyebrow": "Hello, from Sendai",
+      "photoPlaceholder": "Your photograph\nbelongs here",
+      "photoCaption": "A person behind the equations.",
+      "heading": "Curiosity at the edge\nof *complexity.*",
+      "paragraph": "I am interested in how structure shapes dynamics, how systems remember, and how patterns can help us understand what comes next.",
+      "aboutLink": "A little more about me"
+    },
+    "research": {
+      "eyebrow": "01 / Questions that guide me",
+      "heading": "Research, in four currents",
+      "link": "Explore the research"
+    },
+    "publications": {
+      "eyebrow": "02 / Ideas into words",
+      "heading": "Selected publications",
+      "link": "All publications & talks",
+      "emptyNote": "Verified publications will be added here. The sample above demonstrates the layout and is excluded from the CV."
+    },
+    "projects": {
+      "eyebrow": "03 / From theory to practice",
+      "heading": "Things I am building",
+      "link": "View the project gallery"
+    },
+    "journal": {
+      "eyebrow": "04 / Notes from the shoreline",
+      "heading": "The journal",
+      "link": "Browse all notes"
+    },
+    "contact": {
+      "eyebrow": "Good ideas begin with a conversation",
+      "heading": "Let’s find a\n*common rhythm.*",
+      "paragraph": "For research conversations, questions, or a simple hello.",
+      "emailButton": "Get in touch",
+      "linksButton": "Contact & professional links",
+      "missingEmail": "Email address to be added."
+    }
+  },
+  "about": {
+    "meta": {
+      "title": "About",
+      "description": "The researcher behind Moonlit Tides: applied mathematics, dynamical systems, and machine learning."
+    },
+    "heading": {
+      "eyebrow": "05 / About",
+      "title": "A person behind the patterns",
+      "description": "Research is part of a larger story. This is a space for the questions, people, and experiences that shape it."
+    },
+    "photoPlaceholder": "Portrait placeholder\nYour photograph belongs here",
+    "greeting": "Hello, I’m",
+    "namePlaceholder": "Name placeholder",
+    "journeyHeading": "My research journey",
+    "journeyParagraph": "My work connects nonlinear dynamical systems, network structure, and data-driven methods. This space will grow with verified milestones, collaborations, and the questions that led from one idea to the next.",
+    "educationHeading": "Academic background",
+    "educationEmpty": "Education history and dates have not been supplied. Add verified entries to the shared academic data to display them here and in the CV.",
+    "experienceHeading": "Research & professional experience",
+    "interestsHeading": "Beyond mathematics",
+    "interestsEmpty": "A space for your interests, hobbies, and life outside research. Personal details to be added.",
+    "gallery": {
+      "eyebrow": "A few things beyond the desk",
+      "heading": "A gallery, waiting to grow",
+      "photoNumber": "Photograph {number}",
+      "placeholder": "Image placeholder",
+      "captionSuffix": " · placeholder"
+    },
+    "contact": {
+      "eyebrow": "Keep in touch",
+      "heading": "Open to a conversation",
+      "paragraph": "Research questions, shared interests, or a thoughtful hello.",
+      "cvLink": "Curriculum vitae",
+      "missingEmail": "An email address has not been supplied yet. The GitHub profile is available above."
+    }
+  },
+  "research": {
+    "meta": {
+      "title": "Research",
+      "description": "Research themes in reservoir computing, nonlinear dynamics, network geometry, and time-series forecasting."
+    },
+    "heading": {
+      "eyebrow": "01 / Research",
+      "title": "Patterns worth following",
+      "description": "At the meeting point of applied mathematics and machine learning: questions about memory, connection, and collective behavior."
+    },
+    "relatedHeading": "Related work",
+    "relatedEmpty": "Verified publications and projects will be linked here when available.",
+    "illustrationAlt": "Conceptual illustration of {title}",
+    "illustrationCaption": "Conceptual illustration, not experimental data.",
+    "themes": [
+      {
+        "id": "reservoir",
+        "number": "01",
+        "title": "Reservoir computing",
+        "subtitle": "Memory in motion",
+        "description": "How can a fixed dynamical system turn a stream of observations into a useful representation? Reservoir computing connects nonlinear dynamics with efficient learning.",
+        "math": "\\mathbf{x}_{t+1}=(1-\\alpha)\\mathbf{x}_t+\\alpha\\tanh(W\\mathbf{x}_t+W_{\\mathrm{in}}\\mathbf{u}_t)",
+        "caption": "An illustrative leaky echo-state update; α controls the memory timescale.",
+        "image": "/images/network.svg"
+      },
+      {
+        "id": "dynamics",
+        "number": "02",
+        "title": "Dynamics & synchronization",
+        "subtitle": "Finding a common rhythm",
+        "description": "Coupled systems can organize into shared patterns. This theme explores nonlinear evolution, collective behavior, and the conditions under which rhythms align.",
+        "math": "\\dot{\\theta}_i=\\omega_i+\\frac{K}{N}\\sum_{j=1}^{N}\\sin(\\theta_j-\\theta_i)",
+        "caption": "The Kuramoto model illustrates phase synchronization in coupled oscillators.",
+        "image": "/images/orbits.svg"
+      },
+      {
+        "id": "networks",
+        "number": "03",
+        "title": "Network structure & geometry",
+        "subtitle": "The shape of connection",
+        "description": "A network is more than a list of links. Its topology and geometry can shape signal propagation, stability, and the information a system can retain.",
+        "math": "L=D-A,\\qquad L\\mathbf{v}_k=\\lambda_k\\mathbf{v}_k",
+        "caption": "The graph Laplacian links connectivity to spectral structure.",
+        "image": "/images/network.svg"
+      },
+      {
+        "id": "forecasting",
+        "number": "04",
+        "title": "Forecasting & machine learning",
+        "subtitle": "Patterns beyond the present",
+        "description": "Time-series forecasting asks what the past can tell us about the future, while respecting uncertainty, sensitivity, and the limits of predictability.",
+        "math": "\\widehat{\\mathbf{y}}_{t+\\tau}=f_{\\theta}(\\mathbf{u}_{t},\\mathbf{u}_{t-1},\\ldots)",
+        "caption": "A general forecast map with horizon τ; this is a conceptual model.",
+        "image": "/images/waves.svg"
+      }
+    ]
+  },
+  "publications": {
+    "meta": {
+      "title": "Publications & talks",
+      "description": "Publications, preprints, posters, and academic talks. Verified records and downloadable citations."
+    },
+    "heading": {
+      "eyebrow": "02 / Publications & talks",
+      "title": "Ideas, shared",
+      "description": "Papers, preprints, presentations, and the conversations they begin. Every real entry here comes from a single shared academic record."
+    },
+    "recordsLabel": "Publication records",
+    "filters": {
+      "type": "Type",
+      "allTypes": "All types",
+      "journal": "Journal papers",
+      "conference": "Conference papers",
+      "preprint": "Preprints",
+      "poster": "Posters",
+      "talk": "Talks",
+      "seminar": "Invited seminars",
+      "year": "Year",
+      "allYears": "All years",
+      "sampleYear": "Sample only",
+      "one": "{count} record",
+      "many": "{count} records"
+    },
+    "noMatches": "No records match these filters. Try another type or year.",
+    "emptyHeading": "A bibliography waiting for your work",
+    "emptyParagraph": "No verified citations have been supplied yet. The clearly labeled example is a layout demonstration, not a publication claim. Real publications and talks will also appear in the automatically generated CV.",
+    "cvPrompt": "Looking for a complete academic overview? ",
+    "cvLink": "View the curriculum vitae",
+    "card": {
+      "sampleYear": "SAMPLE",
+      "placeholder": "Placeholder · not a real citation",
+      "types": {
+        "journal": "journal",
+        "conference": "conference",
+        "preprint": "preprint",
+        "poster": "poster",
+        "talk": "talk",
+        "seminar": "seminar"
+      },
+      "doi": "DOI",
+      "arxiv": "arXiv",
+      "pdf": "PDF",
+      "code": "Code",
+      "slides": "Slides",
+      "bibtexSummary": "BibTeX citation",
+      "copy": "Copy BibTeX",
+      "download": "Download .bib",
+      "copied": "Citation copied.",
+      "copyFailed": "Copy unavailable. Select the citation text above or download the .bib file."
+    }
+  },
+  "projects": {
+    "meta": {
+      "title": "Projects",
+      "description": "A curated collection of research software, experiments, and mathematical explorations."
+    },
+    "heading": {
+      "eyebrow": "03 / Projects",
+      "title": "Theory, made tangible",
+      "description": "A curated home for research software, small experiments, and reproducible ideas. Selected with care, rather than collected automatically."
+    },
+    "listLabel": "Curated projects",
+    "sampleNote": "Sample projects demonstrate the layout. No repository has been presented as completed research.",
+    "card": {
+      "imageAlt": "Illustration for {title}",
+      "sample": "Sample project",
+      "sampleEyebrow": "Your work, thoughtfully curated",
+      "eyebrow": "Research software",
+      "technologiesLabel": "Technologies",
+      "repository": "Repository",
+      "demo": "Live demo",
+      "publication": "Related publication",
+      "publicRepository": "Public repository",
+      "stars": "{count} stars"
+    }
+  },
+  "journal": {
+    "meta": {
+      "title": "Journal",
+      "description": "Research notes, mathematical questions, and observations from beyond the desk."
+    },
+    "heading": {
+      "eyebrow": "04 / The journal",
+      "title": "Notes from the shoreline",
+      "description": "A place for working thoughts, mathematical detours, and small observations. Some ideas need room to breathe before they become something else."
+    },
+    "articlesLabel": "Journal articles",
+    "categoryLabel": "Browse by category",
+    "allCategories": "All currents",
+    "categories": [
+      {
+        "value": "Research Notes",
+        "label": "Research Notes"
+      },
+      {
+        "value": "Conferences & Travel",
+        "label": "Conferences & Travel"
+      },
+      {
+        "value": "Mathematics",
+        "label": "Mathematics"
+      },
+      {
+        "value": "Life & Other Things",
+        "label": "Life & Other Things"
+      }
+    ],
+    "one": "{count} article",
+    "many": "{count} articles",
+    "rssLink": "Subscribe via RSS",
+    "empty": "No articles in this category yet. There is always room for a new beginning.",
+    "sampleCard": "Sample article · illustrative content",
+    "article": {
+      "backLink": "← Back to the journal",
+      "sample": "Sample article · not a personal account",
+      "tagsLabel": "Article tags",
+      "thanks": "Thank you for reading.",
+      "moreLink": "More notes from the shoreline"
+    },
+    "rss": {
+      "title": "Moonlit Tides · Journal",
+      "description": "Research notes and observations from the shoreline.",
+      "samplePrefix": "[Sample article] "
+    }
+  },
+  "cv": {
+    "meta": {
+      "title": "Curriculum vitae",
+      "description": "A downloadable academic CV generated from the same verified data as this website."
+    },
+    "heading": {
+      "eyebrow": "06 / Curriculum vitae",
+      "title": "An academic overview",
+      "description": "A conventional, printable companion to this observatory. Generated automatically from the same academic record used throughout the site."
+    },
+    "draft": "Draft CV · name and background details to be added",
+    "description": "The PDF is rebuilt whenever this site is built. Sample publications and projects are excluded, and missing education or employment details are left unclaimed.",
+    "download": "Download academic CV",
+    "downloadFormat": "↓ PDF",
+    "recordNote": "No verified publication or education history has been assumed.",
+    "contentsLabel": "CV contents",
+    "paperEyebrow": "Curriculum vitae",
+    "interestsHeading": "Research interests",
+    "interests": "Dynamical systems · Reservoir computing · Machine learning · Network topology · Synchronization · Forecasting",
+    "recordsHeading": "Shared academic record",
+    "educationCount": "{count} education entries",
+    "experienceCount": "{count} experience entries",
+    "publicationCount": "{count} publications & posters",
+    "talkCount": "{count} talks & seminars",
+    "generatedNote": "Automatically generated · freely downloadable"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "eyebrow": "404 / A little off course",
+    "heading": "This tide leads\n*somewhere else.*",
+    "description": "The page you are looking for may have moved, or may still be taking shape.",
+    "homeLink": "Back to the observatory",
+    "journalLink": "Or wander through the journal"
+  },
+  "colophon": {
+    "meta": {
+      "title": "About the observatory",
+      "description": "How the lunar phase, lunisolar calendar, and artistic ASCII ocean are calculated."
+    },
+    "heading": {
+      "eyebrow": "Behind the scenes",
+      "title": "A small observatory",
+      "description": "A note on the real calculations, imagined currents, and quiet choices that make this website."
+    },
+    "moonHeading": "The moon is real. The sea is imagined.",
+    "astronomyParagraph": "Astronomy Engine calculates the current Sun–Moon elongation, illuminated fraction, and topocentric moon coordinates. Waxing and waning are derived from the full 0–360° phase angle. The reference location is Sendai, Japan: 38.2682° N, 140.8694° E, elevation 0 m.",
+    "moonArtParagraph": "The ASCII disc is a procedural sphere with illustrative crater texture. It represents the real lunar phase, not a photographic lunar map. Its placement is composed for the page, rather than projected from the reference sky. Its phase orientation is fixed north-up; local sky rotation and libration are not rendered. The reference altitude and azimuth are available in the homepage observation notes.",
+    "motionHeading": "Two clocks, clearly separated",
+    "motionParagraph": "Lunar phase follows real-world time and is recalculated every minute while the page is visible. The slow sea-level envelope starts from the calculated Sun and Moon declinations, hour angles, and distances at Sendai, using a quadrupolar equilibrium potential. Its rotation is accelerated 720 times so a tidal cycle unfolds in about a minute. Six interacting wave scales, perspective, and slowly distorted flow shape the surface. Faceted glints follow the moon’s bright side and illumination; a new moon does not cast a full-moon reflection.",
+    "tideDisclaimer": "This is an artistic visualization. It is not calibrated to a coastline, has no physical water-level units, and must not be used for navigation or tide predictions. Real tides require local bathymetry, coastline geometry, and measured harmonic constituents.",
+    "calendarHeading": "The calendar",
+    "calendarParagraph": "Calendar dates use China / Malaysia time (UTC+8), independent of your device’s timezone. The open-source lunar-javascript library converts those civil dates to the Chinese lunisolar calendar. A small festival registry recognizes Lunar New Year and Mid-Autumn Festival, excluding leap months.",
+    "accessibilityHeading": "A quieter mode",
+    "accessibilityParagraph": "The renderer targets 30 frames per second, caps pixel density, lowers the character count on small screens, and adapts if drawing is too costly. It pauses in hidden tabs and when the scene leaves the viewport. Reduced-motion preferences produce a still scene. Without JavaScript or Canvas, a pre-rendered ASCII snapshot remains visible; its date reflects the last site build.",
+    "technologyHeading": "Made to be kept",
+    "technologyParagraph": "This is a static Astro website hosted on GitHub Pages. Fonts are bundled locally: Cormorant Garamond and DM Sans (SIL Open Font License). There are no required paid APIs, cookies, analytics, or tracking scripts. Public GitHub metadata, when configured, is fetched only during builds and can fail without breaking the site.",
+    "cvParagraph": "Placeholder entries are labeled and are excluded from the generated academic CV. The PDF uses PDFKit, an open-source generator, and shares its academic data with the website.",
+    "sourceLink": "Explore the source"
+  }
+}

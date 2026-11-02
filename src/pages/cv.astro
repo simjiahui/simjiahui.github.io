@@ -1,18 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import RichText from "../components/RichText.astro";
+import { siteContent, plain } from "../data/siteContent";
 import PageHeading from "../components/PageHeading.astro";
 import { academic, profile } from "../data";
 const real = academic.publications.filter((p) => !p.placeholder);
+const copy = siteContent.cv;
 ---
 
 <Layout
-  title="Curriculum vitae"
-  description="A downloadable academic CV generated from the same verified data as this website."
+  title={plain(copy.meta.title)}
+  description={plain(copy.meta.description)}
   ><div class="cream">
     <PageHeading
-      eyebrow="06 / Curriculum vitae"
-      title="An academic overview"
-      description="A conventional, printable companion to this observatory. Generated automatically from the same academic record used throughout the site."
+      eyebrow={copy.heading.eyebrow}
+      title={copy.heading.title}
+      description={copy.heading.description}
     /><section class="container page-section cv-grid">
       <div>
         <p class="eyebrow">{profile.institution}</p><h2>{profile.name}</h2><p
@@ -22,35 +25,46 @@ const real = academic.publications.filter((p) => !p.placeholder);
         </p>{
           profile.nameIsPlaceholder && (
             <p class="sample-label">
-              Draft CV · name and background details to be added
+              <RichText text={copy.draft} />
             </p>
           )
         }<p>
-          The PDF is rebuilt whenever this site is built. Sample publications
-          and projects are excluded, and missing education or employment details
-          are left unclaimed.
+          <RichText text={copy.description} />
         </p><a class="button button-dark" href="/cv.pdf" download
-          >Download academic CV <span aria-hidden="true">↓ PDF</span></a
+          ><RichText text={copy.download} />{" "}<span aria-hidden="true"
+            ><RichText text={copy.downloadFormat} /></span
+          ></a
         ><p class="content-note">
-          No verified publication or education history has been assumed.
+          <RichText text={copy.recordNote} />
         </p>
-      </div><aside class="cv-paper" aria-label="CV contents">
-        <span class="eyebrow">Curriculum vitae</span><h3>{profile.name}</h3><p>
+      </div><aside class="cv-paper" aria-label={plain(copy.contentsLabel)}>
+        <span class="eyebrow"><RichText text={copy.paperEyebrow} /></span><h3>
+          {profile.name}
+        </h3><p>
           {profile.role}<br />{profile.institution}
-        </p><hr /><h4>Research interests</h4><p>
-          Dynamical systems · Reservoir computing · Machine learning · Network
-          topology · Synchronization · Forecasting
-        </p><h4>Shared academic record</h4><p>
-          {academic.education.length} education entries<br />{
-            academic.experience.length
-          } experience entries<br />{
-            real.filter((p) => !["talk", "seminar"].includes(p.type)).length
-          } publications & posters<br />{
-            real.filter((p) => ["talk", "seminar"].includes(p.type)).length
-          } talks & seminars
-        </p><span class="meta"
-          >Automatically generated · freely downloadable</span
-        >
+        </p><hr /><h4><RichText text={copy.interestsHeading} /></h4><p>
+          <RichText text={copy.interests} />
+        </p><h4><RichText text={copy.recordsHeading} /></h4><p>
+          <RichText
+            text={copy.educationCount}
+            variables={{ count: academic.education.length }}
+          /><br /><RichText
+            text={copy.experienceCount}
+            variables={{ count: academic.experience.length }}
+          /><br /><RichText
+            text={copy.publicationCount}
+            variables={{
+              count: real.filter((p) => !["talk", "seminar"].includes(p.type))
+                .length,
+            }}
+          /><br /><RichText
+            text={copy.talkCount}
+            variables={{
+              count: real.filter((p) => ["talk", "seminar"].includes(p.type))
+                .length,
+            }}
+          />
+        </p><span class="meta"><RichText text={copy.generatedNote} /></span>
       </aside>
     </section>
   </div></Layout

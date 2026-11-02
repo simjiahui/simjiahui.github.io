@@ -1,6 +1,8 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { formatDate } from "../data";
+import RichText from "./RichText.astro";
+import { siteContent } from "../data/siteContent";
 interface Props {
   post: CollectionEntry<"journal">;
 }
@@ -28,14 +30,22 @@ const { post } = Astro.props;
     )
   }
   <div class="post-meta">
-    <span>{post.data.category}</span><time
-      datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time
+    <span
+      ><RichText
+        text={siteContent.journal.categories.find(
+          (category) => category.value === post.data.category,
+        )?.label ?? post.data.category}
+      /></span
+    ><time datetime={post.data.date.toISOString()}
+      >{formatDate(post.data.date)}</time
     >
   </div>
   <h3><a href={`/journal/${post.id}/`}>{post.data.title}</a></h3>
   <p>{post.data.description}</p>{
     post.data.sample && (
-      <span class="sample-label">Sample article · illustrative content</span>
+      <span class="sample-label">
+        <RichText text={siteContent.journal.sampleCard} />
+      </span>
     )
   }
 </article>

@@ -1,17 +1,20 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import RichText from "../components/RichText.astro";
+import { siteContent, plain } from "../data/siteContent";
 import PageHeading from "../components/PageHeading.astro";
 import { profile, academic } from "../data";
+const copy = siteContent.about;
 ---
 
 <Layout
-  title="About"
-  description="The researcher behind Moonlit Tides: applied mathematics, dynamical systems, and machine learning."
+  title={plain(copy.meta.title)}
+  description={plain(copy.meta.description)}
   ><div class="cream">
     <PageHeading
-      eyebrow="05 / About"
-      title="A person behind the patterns"
-      description="Research is part of a larger story. This is a space for the questions, people, and experiences that shape it."
+      eyebrow={copy.heading.eyebrow}
+      title={copy.heading.title}
+      description={copy.heading.description}
     /><section class="container about-grid page-section">
       <div>
         <div class="portrait-frame large">
@@ -19,7 +22,7 @@ import { profile, academic } from "../data";
             profile.portrait ? (
               <img
                 src={profile.portrait}
-                alt={`Portrait of ${profile.name}`}
+                alt={plain(siteContent.shared.portraitAlt)}
                 width="600"
                 height="720"
               />
@@ -28,9 +31,7 @@ import { profile, academic } from "../data";
                 <>
                   <span aria-hidden="true">☾</span>
                   <span>
-                    Portrait placeholder
-                    <br />
-                    Your photograph belongs here
+                    <RichText text={copy.photoPlaceholder} />
                   </span>
                 </>
               </div>
@@ -38,19 +39,23 @@ import { profile, academic } from "../data";
           }
         </div><p class="meta">{profile.location}</p>
       </div><div class="about-copy">
-        <p class="eyebrow">Hello, I’m</p><h2>
-          {profile.name}<span class="pink">.</span>
+        <p class="eyebrow"><RichText text={copy.greeting} /></p><h2>
+          {profile.name}<span class="pink"
+            >{siteContent.shared.headingPunctuation}</span
+          >
         </h2>{
           profile.nameIsPlaceholder && (
-            <p class="sample-label">Name placeholder</p>
+            <p class="sample-label">
+              <RichText text={copy.namePlaceholder} />
+            </p>
           )
-        }<p class="lede">{profile.biography}</p><p class="content-note">
-          {profile.biographyNote}
-        </p><h3>My research journey</h3><p>
-          My work connects nonlinear dynamical systems, network structure, and
-          data-driven methods. This space will grow with verified milestones,
-          collaborations, and the questions that led from one idea to the next.
-        </p><h3>Academic background</h3>{
+        }<p class="lede"><RichText text={siteContent.shared.biography} /></p><p
+          class="content-note"
+        >
+          <RichText text={siteContent.shared.biographyNote} />
+        </p><h3><RichText text={copy.journeyHeading} /></h3><p>
+          <RichText text={copy.journeyParagraph} />
+        </p><h3><RichText text={copy.educationHeading} /></h3>{
           academic.education.length ? (
             <ul class="timeline">
               {academic.education.map((e) => (
@@ -66,16 +71,16 @@ import { profile, academic } from "../data";
             </ul>
           ) : (
             <p class="content-note">
-              Education history and dates have not been supplied. Add verified
-              entries to the shared academic data to display them here and in
-              the CV.
+              <RichText text={copy.educationEmpty} />
             </p>
           )
         }{
           academic.experience.length > 0 && (
             <>
               <>
-                <h3>Research & professional experience</h3>
+                <h3>
+                  <RichText text={copy.experienceHeading} />
+                </h3>
                 <ul class="timeline">
                   {academic.experience.map((e) => (
                     <li>
@@ -91,7 +96,7 @@ import { profile, academic } from "../data";
               </>
             </>
           )
-        }<h3>Beyond mathematics</h3>{
+        }<h3><RichText text={copy.interestsHeading} /></h3>{
           profile.interests.length ? (
             <ul>
               {profile.interests.map((i) => (
@@ -100,8 +105,7 @@ import { profile, academic } from "../data";
             </ul>
           ) : (
             <p class="content-note">
-              A space for your interests, hobbies, and life outside research.
-              Personal details to be added.
+              <RichText text={copy.interestsEmpty} />
             </p>
           )
         }
@@ -110,8 +114,8 @@ import { profile, academic } from "../data";
     <section class="section container">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">A few things beyond the desk</p><h2>
-            A gallery, waiting to grow
+          <p class="eyebrow"><RichText text={copy.gallery.eyebrow} /></p><h2>
+            <RichText text={copy.gallery.heading} />
           </h2>
         </div>
       </div><div class="photo-gallery">
@@ -129,15 +133,20 @@ import { profile, academic } from "../data";
               ) : (
                 <div class="photo-placeholder">
                   <span class="eyebrow">
-                    Photograph {String(i + 1).padStart(2, "0")}
+                    <RichText
+                      text={copy.gallery.photoNumber}
+                      variables={{ number: String(i + 1).padStart(2, "0") }}
+                    />
                   </span>
                   <span aria-hidden="true">＋</span>
-                  <span>Image placeholder</span>
+                  <span>
+                    <RichText text={copy.gallery.placeholder} />
+                  </span>
                 </div>
               )}
               <figcaption>
                 {photo.caption}
-                {!photo.src && " · placeholder"}
+                {!photo.src && copy.gallery.captionSuffix}
               </figcaption>
             </figure>
           ))
@@ -145,8 +154,10 @@ import { profile, academic } from "../data";
       </div>
     </section>
     <section id="contact" class="container contact-block">
-      <p class="eyebrow">Keep in touch</p><h2>Open to a conversation</h2><p>
-        Research questions, shared interests, or a thoughtful hello.
+      <p class="eyebrow"><RichText text={copy.contact.eyebrow} /></p><h2>
+        <RichText text={copy.contact.heading} />
+      </h2><p>
+        <RichText text={copy.contact.paragraph} />
       </p><div class="inline-links">
         {
           profile.links.map((l) => (
@@ -157,18 +168,19 @@ import { profile, academic } from "../data";
         }{
           profile.email && (
             <a href={`mailto:${profile.email}`}>
-              Email <span class="arrow-icon" aria-hidden="true" />
+              <RichText text={siteContent.shared.emailLabel} />{" "}
+              <span class="arrow-icon" aria-hidden="true" />
             </a>
           )
         }<a href="/cv.pdf"
-          >Curriculum vitae <span class="arrow-icon" aria-hidden="true"
-          ></span></a
+          ><RichText text={copy.contact.cvLink} />{" "}<span
+            class="arrow-icon"
+            aria-hidden="true"></span></a
         >
       </div>{
         !profile.email && (
           <p class="content-note">
-            An email address has not been supplied yet. The GitHub profile is
-            available above.
+            <RichText text={copy.contact.missingEmail} />
           </p>
         )
       }
