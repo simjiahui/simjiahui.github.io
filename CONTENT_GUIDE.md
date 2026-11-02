@@ -31,7 +31,7 @@ Use GitHub's file search (**Ctrl+F** / **⌘F**) to find the sentence you see on
 | Shared footer, menu/accessibility labels, default site description                            | `shared`                                   |
 | CV overview page, 404, and observatory explanation                                            | `cv`, `notFound`, `colophon`               |
 
-The current defaults preserve the website's existing wording, including your latest biography and “I love learning!” note. **Biography and biography-note fields have moved from `profile.json` to `siteContent.json`**; edit them in their new home from now on.
+**Biography and biography-note fields have moved from `profile.json` to `siteContent.json`**; edit them in their new home from now on.
 
 ### Line breaks and italics, without HTML
 
