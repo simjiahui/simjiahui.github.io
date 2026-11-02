@@ -2,6 +2,8 @@
 
 Verified in the managed Linux workspace on **2 November 2026 (Japan time)**, using Node 24.19.0, Astro 7.4.4, Playwright 1.64.1, and the installed system Chromium.
 
+The following baseline records the initial site build. The latest focused animation results are recorded in the final section.
+
 ## Passed
 
 | Check                               | Observed result                                                                                                                        |
@@ -45,3 +47,30 @@ The earlier unpatched Astro dependency stack was upgraded to Astro 7, Zod 4, and
 - Optional public project metadata falls back to local content when the API is unavailable. No real repository was configured in the sample gallery, so a live successful metadata fetch has not been claimed.
 - Automated accessibility checks do not establish complete accessibility. Manual screen-reader testing, Safari/Firefox testing, physical-device frame-rate testing, and real-content review remain useful future checks.
 - The ocean is a documented artistic simulation, not a calibrated tide model. Build-time static snapshots may age when JavaScript is disabled.
+
+## Homepage animation refinement — 2 November 2026
+
+The focused animation follow-up replaces the original renderer with a denser, cached ASCII moon and buffered multi-scale ocean. Application changes are limited to the hero renderer/model, its sky calculations, hero-only styling, and the corresponding colophon explanation. Academic content, navigation, journal, CV, project/publication functionality, dependencies, and deployment configuration are unchanged.
+
+The final implementation passed:
+
+- `npm run check`: 39 files, zero errors/warnings/hints.
+- `npm test`: 17 tests passed, zero failed/skipped. Added coverage for physical projected lunar illumination, correct waxing/waning orientation, real solar/lunar forcing inputs and inverse-cube distance effects, dense mobile/desktop fallback composition, and absence of a full-moon reflection at new moon.
+- `npm run lint`, `npm run build`, and all 233 local link/asset references.
+- The complete existing `npm run test:browser` suite: all 11 axe scans clean, responsive routes at four widths, filters, keyboard navigation, actual citation copy/downloads, journal/RSS, sitemap, CV, motion preferences, off-screen pausing, and no-JavaScript fallback.
+- `ASTRO_TELEMETRY_DISABLED=1 node --import tsx scripts/animation-check.ts`: real rendered captures at 320/390/768/1440 px, physical new/full/waxing/waning phase fixtures, reduced motion, and no-JavaScript views. Screenshots were opened and visually reviewed, not merely generated.
+
+The first dense-rendering pass exposed a desktop per-glyph Canvas bottleneck (about 18.5 FPS and 52 ms average drawing time). The final sparse glyph-mask/pixel-buffer path measured:
+
+| CSS viewport width | Character grid | Measured FPS | Average drawing time | Capped DPR |
+| ------------------ | -------------- | ------------ | -------------------- | ---------- |
+| 1440 px            | 293 × 108      | 30.0         | 8.26 ms              | 1.5        |
+| 768 px             | 156 × 103      | 29.9         | 4.68 ms              | 1.5        |
+| 390 px             | 75 × 98        | 30.1         | 2.12 ms              | 1.25       |
+| 320 px             | 62 × 98        | 30.1         | 2.15 ms              | 1.25       |
+
+These are short headless Chromium measurements on this test host, with a simulated device pixel ratio of 2 before the renderer's cap; physical-device performance will vary. Small FPS deviations above 30 reflect measurement boundaries. Desktop density is approximately 2.6 times the original 184 × 66 grid. Quality still adapts on slower devices.
+
+Visual iteration strengthened blue crest contours and dark troughs, broke the reflection into wave-driven cream glints with rare pink edges, kept the heading area quiet, and gave static mobile snapshots a color-separated moon and sea. The new slow envelope uses actual Sendai Sun/Moon geometry with a 720× artistic clock; it remains explicitly uncalibrated for coastal tide prediction. No video, GIF, remote imagery, new dependency, or paid service was added.
+
+Final animation screenshots and measured results are in `artifacts/lunar-refinement/`; the final full-suite screenshots/report remain in `artifacts/`. No live deployment is implied by these local checks.

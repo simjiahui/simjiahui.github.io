@@ -14,10 +14,10 @@ const calendarTime = new Intl.DateTimeFormat("en-GB", {
   <div class="lunar-scene" aria-hidden="true">
     <pre
       data-ascii-fallback
-      class="fallback-desktop">{staticScene(state.angle)}</pre>
+      class="fallback-desktop">{staticScene(state.angle, false, state.fraction, state.forcing)}</pre>
     <pre
       data-ascii-fallback
-      class="fallback-mobile">{staticScene(state.angle, true)}</pre><canvas
+      class="fallback-mobile">{staticScene(state.angle, true, state.fraction, state.forcing)}</pre><canvas
       data-lunar-canvas
       data-state={JSON.stringify(state)}></canvas><div class="scene-shade">
     </div>

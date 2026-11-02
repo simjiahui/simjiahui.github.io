@@ -48,3 +48,17 @@ test("Mid-Autumn and a leap month are recognized correctly", () => {
   assert.equal(leap.month, -2);
   assert.equal(leap.festival, null);
 });
+
+test("reference geometry supplies finite lunar and solar forcing without changing the calendar", () => {
+  const state = moonState(new Date("2024-09-17T04:00:00Z"));
+  for (const value of Object.values(state.forcing))
+    assert.ok(Number.isFinite(value));
+  assert.ok(
+    state.forcing.lunarDistance > 0.0023 &&
+      state.forcing.lunarDistance < 0.0028,
+  );
+  assert.ok(
+    state.forcing.solarDistance > 0.98 && state.forcing.solarDistance < 1.02,
+  );
+  assert.match(state.calendar.festival!, /Mid-Autumn/);
+});
