@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+public/cv.pdf
+.cache/
+artifacts/
+
+public/cv.pdf.tmp

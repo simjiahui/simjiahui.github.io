@@ -1,0 +1,177 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeading from "../components/PageHeading.astro";
+import { profile, academic } from "../data";
+---
+
+<Layout
+  title="About"
+  description="The researcher behind Moonlit Tides: applied mathematics, dynamical systems, and machine learning."
+  ><div class="cream">
+    <PageHeading
+      eyebrow="05 / About"
+      title="A person behind the patterns"
+      description="Research is part of a larger story. This is a space for the questions, people, and experiences that shape it."
+    /><section class="container about-grid page-section">
+      <div>
+        <div class="portrait-frame large">
+          {
+            profile.portrait ? (
+              <img
+                src={profile.portrait}
+                alt={`Portrait of ${profile.name}`}
+                width="600"
+                height="720"
+              />
+            ) : (
+              <div class="portrait-placeholder">
+                <>
+                  <span aria-hidden="true">☾</span>
+                  <span>
+                    Portrait placeholder
+                    <br />
+                    Your photograph belongs here
+                  </span>
+                </>
+              </div>
+            )
+          }
+        </div><p class="meta">{profile.location}</p>
+      </div><div class="about-copy">
+        <p class="eyebrow">Hello, I’m</p><h2>
+          {profile.name}<span class="pink">.</span>
+        </h2>{
+          profile.nameIsPlaceholder && (
+            <p class="sample-label">Name placeholder</p>
+          )
+        }<p class="lede">{profile.biography}</p><p class="content-note">
+          {profile.biographyNote}
+        </p><h3>My research journey</h3><p>
+          My work connects nonlinear dynamical systems, network structure, and
+          data-driven methods. This space will grow with verified milestones,
+          collaborations, and the questions that led from one idea to the next.
+        </p><h3>Academic background</h3>{
+          academic.education.length ? (
+            <ul class="timeline">
+              {academic.education.map((e) => (
+                <li>
+                  <span class="meta">
+                    {e.start} — {e.end}
+                  </span>
+                  <h4>{e.title}</h4>
+                  <p>{e.institution}</p>
+                  <p>{e.description}</p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p class="content-note">
+              Education history and dates have not been supplied. Add verified
+              entries to the shared academic data to display them here and in
+              the CV.
+            </p>
+          )
+        }{
+          academic.experience.length > 0 && (
+            <>
+              <>
+                <h3>Research & professional experience</h3>
+                <ul class="timeline">
+                  {academic.experience.map((e) => (
+                    <li>
+                      <span class="meta">
+                        {e.start} — {e.end}
+                      </span>
+                      <h4>{e.title}</h4>
+                      <p>{e.institution}</p>
+                      <p>{e.description}</p>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            </>
+          )
+        }<h3>Beyond mathematics</h3>{
+          profile.interests.length ? (
+            <ul>
+              {profile.interests.map((i) => (
+                <li>{i}</li>
+              ))}
+            </ul>
+          ) : (
+            <p class="content-note">
+              A space for your interests, hobbies, and life outside research.
+              Personal details to be added.
+            </p>
+          )
+        }
+      </div>
+    </section>
+    <section class="section container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">A few things beyond the desk</p><h2>
+            A gallery, waiting to grow
+          </h2>
+        </div>
+      </div><div class="photo-gallery">
+        {
+          profile.gallery.map((photo, i) => (
+            <figure>
+              {photo.src ? (
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  width="600"
+                  height="750"
+                  loading="lazy"
+                />
+              ) : (
+                <div class="photo-placeholder">
+                  <span class="eyebrow">
+                    Photograph {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span aria-hidden="true">＋</span>
+                  <span>Image placeholder</span>
+                </div>
+              )}
+              <figcaption>
+                {photo.caption}
+                {!photo.src && " · placeholder"}
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </section>
+    <section id="contact" class="container contact-block">
+      <p class="eyebrow">Keep in touch</p><h2>Open to a conversation</h2><p>
+        Research questions, shared interests, or a thoughtful hello.
+      </p><div class="inline-links">
+        {
+          profile.links.map((l) => (
+            <a href={l.url}>
+              {l.label} <span class="arrow-icon" aria-hidden="true" />
+            </a>
+          ))
+        }{
+          profile.email && (
+            <a href={`mailto:${profile.email}`}>
+              Email <span class="arrow-icon" aria-hidden="true" />
+            </a>
+          )
+        }<a href="/cv/"
+          >Curriculum vitae <span class="arrow-icon" aria-hidden="true"
+          ></span></a
+        >
+      </div>{
+        !profile.email && (
+          <p class="content-note">
+            An email address has not been supplied yet. The GitHub profile is
+            available above.
+          </p>
+        )
+      }
+    </section>
+  </div></Layout
+>

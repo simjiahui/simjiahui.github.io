@@ -1,0 +1,67 @@
+{
+  "name": "Your name",
+  "nameIsPlaceholder": true,
+  "siteTitle": "Moonlit Tides",
+  "description": "A personal observatory for dynamical systems, learning, and the patterns that connect them.",
+  "role": "PhD researcher in applied mathematics",
+  "institution": "Tohoku University",
+  "location": "Sendai, Japan",
+  "email": "",
+  "portrait": "",
+  "biography": "I am a PhD researcher in applied mathematics at Tohoku University. My research interests span dynamical systems, reservoir computing, machine learning, network topology, synchronization, and time-series forecasting.",
+  "biographyNote": "This introduction uses only the research context supplied for this site. Add your name, background, and personal story when you are ready.",
+  "interests": [],
+  "links": [
+    {
+      "label": "GitHub",
+      "url": "https://github.com/simjiahui"
+    }
+  ],
+  "navigation": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "Research",
+      "href": "/research/"
+    },
+    {
+      "label": "Publications",
+      "href": "/publications/"
+    },
+    {
+      "label": "Projects",
+      "href": "/projects/"
+    },
+    {
+      "label": "Journal",
+      "href": "/journal/"
+    },
+    {
+      "label": "About",
+      "href": "/about/"
+    },
+    {
+      "label": "CV",
+      "href": "/cv/"
+    }
+  ],
+  "gallery": [
+    {
+      "src": "",
+      "alt": "",
+      "caption": "A place you love"
+    },
+    {
+      "src": "",
+      "alt": "",
+      "caption": "A moment worth keeping"
+    },
+    {
+      "src": "",
+      "alt": "",
+      "caption": "Life beyond equations"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+---
+import type { Publication } from "../data/schema";
+import { profile, formatDate } from "../data";
+interface Props {
+  publication: Publication;
+}
+const { publication: p } = Astro.props;
+const links = [
+  { label: "DOI", url: p.doi ? `https://doi.org/${p.doi}` : "" },
+  { label: "arXiv", url: p.arxiv ? `https://arxiv.org/abs/${p.arxiv}` : "" },
+  { label: "PDF", url: p.pdf },
+  { label: "Code", url: p.code },
+  { label: "Slides", url: p.slides },
+].filter((l) => l.url);
+---
+
+<article
+  class="publication-item"
+  id={p.id}
+  data-publication
+  data-type={p.type}
+  data-year={p.placeholder ? "sample" : p.date.slice(0, 4)}
+>
+  <div class="publication-date">
+    <span>{p.placeholder ? "SAMPLE" : p.date.slice(0, 4)}</span><span
+      class="type-label">{p.type}</span
+    >
+  </div>
+  <div class="publication-body">
+    {
+      p.placeholder && (
+        <span class="sample-label">Placeholder · not a real citation</span>
+      )
+    }
+    <h3>{p.title}</h3>
+    <p class="authors">
+      {
+        p.authors.map((author, index) => (
+          <>
+            {index > 0 && ", "}
+            {author === profile.name ? <strong>{author}</strong> : author}
+          </>
+        ))
+      }
+    </p>
+    <p class="publication-venue">
+      {p.venue} · {p.status}{
+        !p.placeholder && (
+          <>
+            {" "}
+            · <time datetime={p.date}>{formatDate(p.date)}</time>
+          </>
+        )
+      }
+    </p>
+    {
+      links.length > 0 && (
+        <div class="inline-links">
+          {links.map((l) => (
+            <a href={l.url}>
+              {l.label} <span class="arrow-icon" aria-hidden="true" />
+            </a>
+          ))}
+        </div>
+      )
+    }
+    {
+      p.bibtex && !p.placeholder && (
+        <details class="bibtex">
+          <>
+            <summary>BibTeX citation</summary>
+            <pre>
+              <code>{p.bibtex}</code>
+            </pre>
+            <button data-copy={p.bibtex} class="small-button">
+              Copy BibTeX
+            </button>
+            <button
+              data-download={p.bibtex}
+              data-filename={`${p.id}.bib`}
+              class="small-button"
+            >
+              Download .bib
+            </button>
+            <span class="copy-status" role="status" />
+          </>
+        </details>
+      )
+    }
+  </div>
+</article>
+
+<script src="../scripts/publications.ts"></script>

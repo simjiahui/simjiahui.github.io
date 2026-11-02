@@ -1,0 +1,108 @@
+---
+import { profile } from "../data";
+import { moonState } from "../lib/astronomy";
+import { staticScene } from "../lib/ascii";
+const state = moonState();
+const calendarTime = new Intl.DateTimeFormat("en-GB", {
+  dateStyle: "medium",
+  timeStyle: "short",
+  timeZone: "Asia/Shanghai",
+}).format(new Date(state.date));
+---
+
+<section class="lunar-hero" aria-labelledby="hero-title">
+  <div class="lunar-scene" aria-hidden="true">
+    <pre
+      data-ascii-fallback
+      class="fallback-desktop">{staticScene(state.angle)}</pre>
+    <pre
+      data-ascii-fallback
+      class="fallback-mobile">{staticScene(state.angle, true)}</pre><canvas
+      data-lunar-canvas
+      data-state={JSON.stringify(state)}></canvas><div class="scene-shade">
+    </div>
+  </div>
+  <div class="hero-inner container">
+    <div class="hero-topline">
+      <span class="eyebrow">A personal academic observatory</span><span
+        class="hero-coordinate">38.2682° N &nbsp; 140.8694° E</span
+      >
+    </div>
+    <div class="hero-copy">
+      <p class="eyebrow hero-role">
+        Applied mathematics · {profile.institution}
+      </p>
+      {
+        profile.nameIsPlaceholder && (
+          <span class="name-placeholder">
+            Name placeholder — personalize this space
+          </span>
+        )
+      }
+      <h1 id="hero-title">{profile.name}<span class="pink">.</span></h1>
+      <p class="hero-subtitle">
+        Patterns in motion.<br /><em>Possibilities in connection.</em>
+      </p>
+      <p class="hero-description">
+        {profile.role}, exploring dynamical systems, reservoir computing, and
+        the structures behind learning.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-pink" href="/research/"
+          >Explore my research <span aria-hidden="true"
+            ><span class="arrow-icon" aria-hidden="true"></span></span
+          ></a
+        ><a class="subtle-link" href="/publications/"
+          >Publications <span class="arrow-icon" aria-hidden="true"></span></a
+        ><a class="subtle-link" href="/cv/"
+          >CV <span class="arrow-icon" aria-hidden="true"></span></a
+        >
+      </div>
+    </div>
+    <div class="hero-bottom">
+      <a class="scroll-cue" href="#introduction"
+        ><span aria-hidden="true">↓</span> A little further, a little deeper</a
+      ><div class="moon-readout">
+        <span class="readout-dot" aria-hidden="true"></span><span data-phase
+          >{state.phase}</span
+        ><span class="readout-divider">/</span><span data-illumination
+          >{Math.round(state.fraction * 100)}% illuminated</span
+        ><span class="lunar-date" data-lunar-date lang="zh"
+          >{state.calendar.label}</span
+        >
+      </div>
+    </div>
+  </div>
+</section>
+<div class="observation-bar">
+  <div class="container observation-inner">
+    <p>
+      <span class="eyebrow">Under the same moon</span><span data-festival
+        >{
+          state.calendar.festival ?? "A quiet moment under the same moon."
+        }</span
+      >
+    </p><a href="/colophon/#lunar-scene"
+      >Real lunar phase. An imagined sea. <span aria-hidden="true"
+        ><span class="arrow-icon" aria-hidden="true"></span></span
+      ></a
+    >
+  </div>
+</div>
+<details class="observation-details container">
+  <summary>Observation notes & calendar</summary><p>
+    Reference sky: Sendai, Japan (38.2682° N, 140.8694° E). <span
+      data-moon-position
+      >{state.altitude.toFixed(1)}° altitude · {state.azimuth.toFixed(1)}°
+      azimuth</span
+    >. Calendar: China / Malaysia time (UTC+8). Calculated <span
+      data-observation-time>{calendarTime}</span
+    > UTC+8; updates each minute when JavaScript is available. Without JavaScript,
+    the scene is a build-time snapshot.
+  </p><p>
+    The displayed disc has a fixed artistic placement and north-up phase
+    orientation. It is not a live sky map. Ocean motion is accelerated and does
+    not predict coastal tides.
+  </p>
+</details>
+<script src="../scripts/lunar-scene.ts"></script>

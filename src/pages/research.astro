@@ -1,0 +1,98 @@
+---
+import katex from "katex";
+import Layout from "../layouts/Layout.astro";
+import PageHeading from "../components/PageHeading.astro";
+import { themes } from "../data/themes";
+import { academic, projects } from "../data";
+---
+
+<Layout
+  title="Research"
+  description="Research themes in reservoir computing, nonlinear dynamics, network geometry, and time-series forecasting."
+>
+  <div class="cream">
+    <PageHeading
+      eyebrow="01 / Research"
+      title="Patterns worth following"
+      description="At the meeting point of applied mathematics and machine learning: questions about memory, connection, and collective behavior."
+    />
+    <div class="container research-list">
+      {
+        themes.map((theme) => {
+          const pubs = academic.publications.filter(
+            (p) => !p.placeholder && p.themes.includes(theme.id),
+          );
+          const related = projects.filter(
+            (p) => !p.placeholder && p.themes.includes(theme.id),
+          );
+          return (
+            <section id={theme.id} class="research-theme">
+              <>
+                <div class="research-text">
+                  <>
+                    <p class="eyebrow">
+                      {theme.number} / {theme.subtitle}
+                    </p>
+                    <h2>{theme.title}</h2>
+                    <p class="lede">{theme.description}</p>
+                    <div
+                      class="equation"
+                      set:html={katex.renderToString(theme.math, {
+                        displayMode: true,
+                        throwOnError: true,
+                        output: "htmlAndMathml",
+                      })}
+                    />
+                    <p class="meta">{theme.caption}</p>
+                    <div class="related-work">
+                      <h3>Related work</h3>
+                      {pubs.length || related.length ? (
+                        <ul>
+                          {pubs.map((p) => (
+                            <li>
+                              <a href={`/publications/#${p.id}`}>
+                                {p.title}{" "}
+                                <span class="arrow-icon" aria-hidden="true" />
+                              </a>
+                            </li>
+                          ))}
+                          {related.map((p) => (
+                            <li>
+                              <a href={`/projects/#${p.id}`}>
+                                {p.title}{" "}
+                                <span class="arrow-icon" aria-hidden="true" />
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p class="content-note">
+                          Verified publications and projects will be linked here
+                          when available.
+                        </p>
+                      )}
+                    </div>
+                  </>
+                </div>
+                <figure>
+                  <>
+                    <img
+                      src={theme.image}
+                      alt={`Conceptual illustration of ${theme.title.toLowerCase()}`}
+                      width="900"
+                      height="540"
+                      loading="lazy"
+                    />
+                    <figcaption>
+                      Conceptual illustration, not experimental data.
+                    </figcaption>
+                  </>
+                </figure>
+              </>
+            </section>
+          );
+        })
+      }
+    </div>
+  </div>
+</Layout>
