@@ -37,7 +37,6 @@
     "observation": {
       "eyebrow": "Under the same moon",
       "festivalFallback": "Using the real-time lunar phase following the UTC+8 timezone, independent of your device’s timezone.",
-      // "explanationLink": "About the design",
       "summary": "Observation notes & calendar",
       "reference": "Reference sky: {referenceName} ({referenceLatitude}, {referenceLongitude}). ",
       "position": "{altitude}° altitude · {azimuth}° azimuth",
