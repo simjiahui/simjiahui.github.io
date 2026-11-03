@@ -60,7 +60,7 @@ Some wording contains values such as `{name}`, `{role}`, `{institution}`, `{perc
 
 In `research.themes`, edit titles/descriptions/captions freely, but keep each `id` stable so related publications and project links continue to work. Equations use the existing LaTeX `math` field, with backslashes escaped for JSON; changing mathematical notation does not require an Astro component edit. In `journal.categories`, edit `label` to change what visitors see, and keep `value` unchanged so article categories and filters still match.
 
-The observation notes and colophon describe real calculations: editing their text does not change the animation’s reference location or model. Keep those scientific statements accurate.
+Edit `src/data/referenceLocation.json` to change the astronomical reference observer: `name`, decimal-degree `latitude` (north positive), `longitude` (east positive), and `elevation` in metres. This single configuration supplies the lunar coordinates, tidal geometry, homepage coordinates, observation notes, and colophon. Keep `{referenceName}`, `{referenceLatitude}`, `{referenceLongitude}`, and `{referenceElevation}` intact in the explanatory copy; the website fills them automatically. The personal location in `profile.json` is independent. The Chinese lunisolar calendar stays fixed to `Asia/Shanghai` (UTC+8), regardless of the reference observer or visitor timezone.
 
 The configuration is validated during every build. Missing keys, misspelled placeholders, invalid types, and duplicate theme/category identifiers fail the checks with a field path. If checks fail after an edit, fix the indicated field in the same branch. No part of the new wording is published until the build passes and the pull request is merged.
 
