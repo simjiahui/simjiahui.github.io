@@ -64,6 +64,8 @@ Edit `src/data/referenceLocation.json` to change the astronomical reference obse
 
 The configuration is validated during every build. Missing keys, misspelled placeholders, invalid types, and duplicate theme/category identifiers fail the checks with a field path. If checks fail after an edit, fix the indicated field in the same branch. No part of the new wording is published until the build passes and the pull request is merged.
 
+Two optional messages can be removed or set to `""`: `hero.observation.explanationLink` hides the link beside the lunar observation note, and `home.contact.missingEmail` hides the missing-email notice. Keep other required keys intact.
+
 ### Which other files still hold content?
 
 `siteContent.json` holds **page wording**, while the existing data files retain the content they share with other features:

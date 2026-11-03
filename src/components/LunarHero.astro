@@ -122,12 +122,14 @@ const copy = siteContent.hero;
       ><span data-festival data-fallback={copy.observation.festivalFallback}
         >{state.calendar.festival ?? copy.observation.festivalFallback}</span
       >
-    </p><a href="/colophon/#lunar-scene"
-      ><RichText text={copy.observation.explanationLink} />{" "}<span
-        aria-hidden="true"
-        ><span class="arrow-icon" aria-hidden="true"></span></span
-      ></a
-    >
+    </p>{
+      copy.observation.explanationLink && (
+        <a href="/colophon/#lunar-scene">
+          <RichText text={copy.observation.explanationLink} />{" "}
+          <span class="arrow-icon" aria-hidden="true" />
+        </a>
+      )
+    }
   </div>
 </div>
 <details class="observation-details container">
