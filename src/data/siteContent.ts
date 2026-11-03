@@ -8,7 +8,7 @@ const contentShape = z.strictObject({
   _editing: z.string(),
   shared: z.strictObject({
     biography: z.string(),
-    biographyNote: z.string(),
+    biographyNote: z.string().default(""),
     siteDescription: z.string(),
     headingPunctuation: z.string(),
     portraitAlt: z.string(),

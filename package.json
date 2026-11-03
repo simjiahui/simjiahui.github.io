@@ -18,7 +18,14 @@
     "format": "prettier --write .",
     "test:browser": "ASTRO_TELEMETRY_DISABLED=1 node --import tsx scripts/browser-check.ts",
     "test:content-edit": "ASTRO_TELEMETRY_DISABLED=1 node --import tsx scripts/content-edit-check.ts",
-    "test:reference": "ASTRO_TELEMETRY_DISABLED=1 node --import tsx scripts/reference-check.ts"
+    "test:reference": "ASTRO_TELEMETRY_DISABLED=1 node --import tsx scripts/reference-check.ts",
+    "content:prepare": "node --import tsx scripts/prepare-cms.ts",
+    "predev": "npm run content:prepare",
+    "prestart": "npm run content:prepare",
+    "precheck": "npm run content:prepare",
+    "pretest": "npm run content:prepare",
+    "precv": "npm run content:prepare",
+    "test:cms": "ASTRO_TELEMETRY_DISABLED=1 node --import tsx scripts/cms-check.ts"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.3.5",

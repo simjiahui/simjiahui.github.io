@@ -7,6 +7,7 @@ tags: [reservoir computing, dynamics, sample]
 cover: /images/network.svg
 coverAlt: "An abstract network of pink and blue connections"
 sample: true
+draft: false
 ---
 
 This is a **sample article**, written to demonstrate the journal layout. It does not describe a completed research project or claim any research findings.

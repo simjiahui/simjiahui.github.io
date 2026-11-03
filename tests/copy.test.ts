@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { profile } from "../src/data";
 import { parseCopy, interpolate, plainCopy } from "../src/lib/copy";
 import { siteContent, siteContentSchema, text } from "../src/data/siteContent";
 
@@ -31,7 +32,7 @@ test("copy placeholders preserve zero counts, shared facts, and literal data", (
     interpolate("Hello {name}", { name: "<b>Ada</b>" }),
     "Hello <b>Ada</b>",
   );
-  assert.match(text(siteContent.hero.roleLine), /Tohoku University/);
+  assert.ok(text(siteContent.hero.roleLine).includes(profile.institution));
   assert.throws(() => interpolate("{unknown}"), /Unknown content placeholder/);
   assert.throws(
     () => interpolate("{constructor}"),
