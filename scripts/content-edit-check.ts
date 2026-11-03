@@ -8,8 +8,8 @@ import assert from "node:assert/strict";
 const path = "src/data/siteContent.json";
 const original = await readFile(path, "utf8");
 const changed = JSON.parse(original);
-changed.home.introduction.heading = "An edited heading\nwith *gentle emphasis*";
-changed.home.introduction.paragraph =
+changed.home.introduction.aboutLink = "A little more about *my work*";
+changed.hero.description =
   '<img src=x onerror="window.copyInjected=true"> is literal copy.';
 changed.hero.subtitle = "An edited subtitle\n*Second line*";
 changed.hero.illumination = "Illumination: {percent}%";
@@ -49,13 +49,12 @@ try {
   const base = `http://127.0.0.1:${server.port}`;
   await page.goto(base, { waitUntil: "networkidle" });
   assert.equal(
-    await page.locator(".intro-copy h2 em").innerText(),
-    "gentle emphasis",
+    await page.locator(".hero-about-link em").innerText(),
+    "my work",
   );
-  assert.equal(await page.locator(".intro-copy h2 br").count(), 1);
-  assert.equal(await page.locator(".intro-copy img").count(), 0);
+  assert.equal(await page.locator(".hero-description img").count(), 0);
   assert.ok(
-    (await page.locator(".intro-copy").innerText()).includes(
+    (await page.locator(".hero-description").innerText()).includes(
       "<img src=x onerror=",
     ),
   );

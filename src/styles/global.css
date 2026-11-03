@@ -393,6 +393,29 @@ select {
   align-self: flex-start;
   padding-top: 3px;
 }
+.lunar-hero .hero-portrait {
+  position: absolute;
+  right: 0;
+  bottom: 150px;
+  width: 180px;
+  padding: 9px;
+  border-color: #7d8296;
+}
+.hero-portrait .portrait-placeholder > span:first-child {
+  font-size: 3rem;
+}
+.hero-portrait .portrait-placeholder > span:last-child {
+  font-size: 0.55rem;
+}
+.hero-primary-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.hero-about-link {
+  margin-left: 2px;
+}
 .hero-copy {
   margin-block: auto;
   max-width: 620px;
@@ -1390,6 +1413,20 @@ select {
   .hero-inner {
     min-height: 850px;
   }
+  .lunar-hero .hero-portrait {
+    top: 85px;
+    bottom: auto;
+    left: 0;
+    right: auto;
+    width: 110px;
+    padding: 6px;
+  }
+  .hero-portrait .portrait-placeholder > span:first-child {
+    font-size: 2rem;
+  }
+  .hero-portrait .portrait-placeholder > span:last-child {
+    font-size: 0.45rem;
+  }
   .hero-copy {
     padding-top: 240px;
     padding-bottom: 65px;
@@ -1657,9 +1694,6 @@ select {
   }
   .section {
     padding-block: 65px;
-  }
-  .research-home {
-    padding-top: 0;
   }
   .section-heading {
     align-items: flex-start;

@@ -1,7 +1,7 @@
 ---
 import { profile } from "../data";
 import RichText from "../components/RichText.astro";
-import { siteContent, text } from "../data/siteContent";
+import { siteContent, text, plain } from "../data/siteContent";
 import { CALENDAR_ZONE, moonState } from "../lib/astronomy";
 import { staticScene } from "../lib/ascii";
 const state = moonState();
@@ -31,6 +31,25 @@ const copy = siteContent.hero;
         class="hero-coordinate"><RichText text={copy.coordinates} /></span
       >
     </div>
+    <div class="hero-portrait portrait-frame">
+      {
+        profile.portrait ? (
+          <img
+            src={profile.portrait}
+            alt={plain(siteContent.shared.portraitAlt)}
+            width="400"
+            height="480"
+          />
+        ) : (
+          <div class="portrait-placeholder">
+            <span aria-hidden="true">☾</span>
+            <span>
+              <RichText text={siteContent.home.introduction.photoPlaceholder} />
+            </span>
+          </div>
+        )
+      }
+    </div>
     <div class="hero-copy">
       <p class="eyebrow hero-role">
         <RichText text={copy.roleLine} />
@@ -54,11 +73,18 @@ const copy = siteContent.hero;
         <RichText text={copy.description} />
       </p>
       <div class="hero-actions">
-        <a class="button button-pink" href="/research/"
-          ><RichText text={copy.researchButton} />{" "}<span aria-hidden="true"
-            ><span class="arrow-icon" aria-hidden="true"></span></span
-          ></a
-        ><a class="subtle-link" href="/publications/"
+        <div class="hero-primary-actions">
+          <a class="button button-pink" href="/research/"
+            ><RichText text={copy.researchButton} />{" "}<span
+              aria-hidden="true"
+              ><span class="arrow-icon" aria-hidden="true"></span></span
+            ></a
+          >
+          <a class="subtle-link hero-about-link" href="/about/">
+            <RichText text={siteContent.home.introduction.aboutLink} />{" "}
+            <span class="arrow-icon" aria-hidden="true"></span>
+          </a>
+        </div><a class="subtle-link" href="/publications/"
           ><RichText text={copy.publicationsButton} />{" "}<span
             class="arrow-icon"
             aria-hidden="true"></span></a
@@ -70,7 +96,7 @@ const copy = siteContent.hero;
       </div>
     </div>
     <div class="hero-bottom">
-      <a class="scroll-cue" href="#introduction"
+      <a class="scroll-cue" href="#research"
         ><span aria-hidden="true">↓</span> <RichText text={copy.scrollCue} /></a
       ><div class="moon-readout">
         <span class="readout-dot" aria-hidden="true"></span><span data-phase
