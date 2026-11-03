@@ -17,7 +17,8 @@
     "lint": "prettier --check \"src/**/*.{astro,ts,css}\" \"scripts/**/*.{ts,mjs}\" \"tests/**/*.ts\" \"*.mjs\"",
     "format": "prettier --write .",
     "test:browser": "ASTRO_TELEMETRY_DISABLED=1 node --import tsx scripts/browser-check.ts",
-    "test:content-edit": "ASTRO_TELEMETRY_DISABLED=1 node --import tsx scripts/content-edit-check.ts"
+    "test:content-edit": "ASTRO_TELEMETRY_DISABLED=1 node --import tsx scripts/content-edit-check.ts",
+    "test:reference": "ASTRO_TELEMETRY_DISABLED=1 node --import tsx scripts/reference-check.ts"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.3.5",

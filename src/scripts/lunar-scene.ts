@@ -260,7 +260,7 @@ if (canvas) {
   async function refresh() {
     if (disposed || document.hidden || !visible) return;
     try {
-      const { moonState } = await import("../lib/astronomy");
+      const { CALENDAR_ZONE, moonState } = await import("../lib/astronomy");
       if (disposed) return;
       state = moonState(new Date());
       const set = (selector: string, value: string) => {
@@ -299,7 +299,7 @@ if (canvas) {
         new Intl.DateTimeFormat("en-GB", {
           dateStyle: "medium",
           timeStyle: "short",
-          timeZone: "Asia/Shanghai",
+          timeZone: CALENDAR_ZONE,
         }).format(new Date()),
       );
       // Keep the visual clock continuous; only the slowly evolving ephemeris changes.

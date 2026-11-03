@@ -8,12 +8,8 @@ import {
   SiderealTime,
 } from "astronomy-engine";
 import { Solar } from "lunar-javascript";
-export const REFERENCE = {
-  name: "Sendai, Japan",
-  latitude: 38.2682,
-  longitude: 140.8694,
-  elevation: 0,
-};
+import { REFERENCE, type ReferenceLocation } from "./reference";
+export { REFERENCE } from "./reference";
 export const CALENDAR_ZONE = "Asia/Shanghai";
 export const festivals = [
   { month: 1, day: 1, label: "Lunar New Year · 春节" },
@@ -51,16 +47,19 @@ export function lunarCalendar(date: Date) {
         ?.label ?? null,
   };
 }
-export function moonState(date = new Date()) {
+export function moonState(
+  date = new Date(),
+  reference: ReferenceLocation = REFERENCE,
+) {
   const angle = MoonPhase(date);
   const observer = new Observer(
-    REFERENCE.latitude,
-    REFERENCE.longitude,
-    REFERENCE.elevation,
+    reference.latitude,
+    reference.longitude,
+    reference.elevation,
   );
   const equatorial = Equator(Body.Moon, date, observer, true, true);
   const solar = Equator(Body.Sun, date, observer, true, true);
-  const sidereal = SiderealTime(date) + REFERENCE.longitude / 15;
+  const sidereal = SiderealTime(date) + reference.longitude / 15;
   const radians = Math.PI / 180;
   const horizon = Horizon(
     date,
@@ -79,7 +78,7 @@ export function moonState(date = new Date()) {
     azimuth: horizon.azimuth,
     calendar: lunarCalendar(date),
     forcing: {
-      latitude: REFERENCE.latitude * radians,
+      latitude: reference.latitude * radians,
       lunarDeclination: equatorial.dec * radians,
       solarDeclination: solar.dec * radians,
       lunarHourAngle: (sidereal - equatorial.ra) * 15 * radians,

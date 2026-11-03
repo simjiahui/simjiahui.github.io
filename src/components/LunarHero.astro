@@ -2,13 +2,13 @@
 import { profile } from "../data";
 import RichText from "../components/RichText.astro";
 import { siteContent, text } from "../data/siteContent";
-import { moonState } from "../lib/astronomy";
+import { CALENDAR_ZONE, moonState } from "../lib/astronomy";
 import { staticScene } from "../lib/ascii";
 const state = moonState();
 const calendarTime = new Intl.DateTimeFormat("en-GB", {
   dateStyle: "medium",
   timeStyle: "short",
-  timeZone: "Asia/Shanghai",
+  timeZone: CALENDAR_ZONE,
 }).format(new Date(state.date));
 const copy = siteContent.hero;
 ---

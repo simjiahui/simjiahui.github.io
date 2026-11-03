@@ -42,6 +42,7 @@ npm test               # astronomy, calendar, tides, renderer, content, workflow
 npm run lint           # Prettier formatting, including Astro
 npm run build          # validated CV + static site + internal links/fragments
 npm run test:browser    # production preview + Playwright + axe + screenshots
+npm run test:reference  # isolated location change + rendered labels + browser calculations
 ```
 
 For browser checks, either install Chromium using `npx playwright install --with-deps chromium`, use `/usr/bin/chromium`, or set `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` to an installed browser. The test runner starts/stops its own local preview and writes screenshots and a report to ignored `artifacts/`.

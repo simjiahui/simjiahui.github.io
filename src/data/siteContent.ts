@@ -2,6 +2,7 @@ import { z } from "zod";
 import rawContent from "./siteContent.json";
 import { profile } from "./index";
 import { interpolate, plainCopy } from "../lib/copy";
+import { referenceVariables } from "../lib/reference";
 
 const contentShape = z.strictObject({
   _editing: z.string(),
@@ -336,6 +337,10 @@ export const siteContentSchema = contentShape.superRefine((content, ctx) => {
     "role",
     "institution",
     "location",
+    "referenceName",
+    "referenceLatitude",
+    "referenceLongitude",
+    "referenceElevation",
     "siteTitle",
     "count",
     "percent",
@@ -394,6 +399,7 @@ export function text(
     institution: profile.institution,
     location: profile.location,
     siteTitle: profile.siteTitle,
+    ...referenceVariables(),
     ...variables,
   });
 }

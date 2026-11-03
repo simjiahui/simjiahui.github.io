@@ -35,6 +35,8 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Verify JSON-only content editing
         run: npm run test:content-edit
+      - name: Verify shared astronomical reference
+        run: npm run test:reference
       - name: Test responsive layout, accessibility, and reduced motion
         run: npm run test:browser
       - name: Save screenshots and browser report

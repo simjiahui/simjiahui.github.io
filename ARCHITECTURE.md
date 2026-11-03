@@ -48,7 +48,7 @@ Astronomy Engine supplies:
 - `Illumination(Body.Moon, date)`: physical illuminated fraction.
 - `Equator` and `Horizon`: apparent topocentric horizontal coordinates for the reference observer, including normal atmospheric refraction.
 
-The reference observer is **Sendai, Japan, 38.2682° N, 140.8694° E, elevation 0 m**. The phase label uses the whole phase angle, so waxing and waning cannot be confused by equal illumination fractions. Near the four principal phases, a ±5° naming window is used; the fraction remains continuous.
+The reference observer is configured once in `src/data/referenceLocation.json`. `src/lib/reference.ts` supplies that observer and hemisphere-aware coordinate labels to both the calculations and explanatory copy. The phase label uses the whole phase angle, so waxing and waning cannot be confused by equal illumination fractions. Near the four principal phases, a ±5° naming window is used; the fraction remains continuous.
 
 The real-time calculation uses UTC instants. Calendar presentation deliberately uses **UTC+8 (`Asia/Shanghai`)**, which is also Malaysia's civil offset. `Intl.DateTimeFormat` first selects the civil day in that zone, then `lunar-javascript` converts that day. Leap lunar months retain a negative month number. A small extensible `festivals` registry matches normal lunar month/day values; leap months are excluded. It currently recognizes Lunar New Year (1/1) and Mid-Autumn (8/15).
 
@@ -64,7 +64,7 @@ The moon has a fixed compositional position, separately documented from its real
 
 ## Artistic ocean dynamics
 
-The slow envelope now starts from actual topocentric **Sun and Moon declinations, hour angles, and distances** at the Sendai reference location. For each body, latitude `φ`, declination `δ`, and hour angle `H` give a vertical direction cosine and a quadrupolar equilibrium potential:
+The slow envelope now starts from actual topocentric **Sun and Moon declinations, hour angles, and distances** at the configured reference location. For each body, latitude `φ`, declination `δ`, and hour angle `H` give a vertical direction cosine and a quadrupolar equilibrium potential:
 
 ```text
 q = sin φ sin δ + cos φ cos δ cos H
