@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import RichText from "../components/RichText.astro";
-import { siteContent, plain } from "../data/siteContent";
+import { siteContent } from "../data/siteContent";
 import Layout from "../layouts/Layout.astro";
 import LunarHero from "../components/LunarHero.astro";
 import SectionHeading from "../components/SectionHeading.astro";
@@ -18,52 +18,7 @@ const copy = siteContent.home;
 
 <Layout>
   <LunarHero />
-  <section id="introduction" class="section cream">
-    <div class="container intro-grid">
-      <div class="intro-side">
-        <p class="eyebrow"><RichText text={copy.introduction.eyebrow} /></p><div
-          class="portrait-frame"
-        >
-          {
-            profile.portrait ? (
-              <img
-                src={profile.portrait}
-                alt={plain(siteContent.shared.portraitAlt)}
-                width="400"
-                height="480"
-                loading="lazy"
-              />
-            ) : (
-              <div class="portrait-placeholder">
-                <>
-                  <span aria-hidden="true">☾</span>
-                  <span>
-                    <RichText text={copy.introduction.photoPlaceholder} />
-                  </span>
-                </>
-              </div>
-            )
-          }
-        </div><p class="meta">
-          <RichText text={copy.introduction.photoCaption} />
-        </p>
-      </div><div class="intro-copy">
-        <h2><RichText text={copy.introduction.heading} /></h2><p class="lede">
-          <RichText text={siteContent.shared.biography} />
-        </p><p>
-          <RichText text={copy.introduction.paragraph} />
-        </p><p class="content-note">
-          <RichText text={siteContent.shared.biographyNote} />
-        </p><a class="text-link" href="/about/"
-          ><RichText text={copy.introduction.aboutLink} />{" "}<span
-            aria-hidden="true"
-            ><span class="arrow-icon" aria-hidden="true"></span></span
-          ></a
-        >
-      </div>
-    </div>
-  </section>
-  <section class="section cream research-home">
+  <section id="research" class="section cream research-home">
     <div class="container">
       <SectionHeading
         eyebrow={copy.research.eyebrow}
