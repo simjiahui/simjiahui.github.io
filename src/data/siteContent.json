@@ -37,6 +37,7 @@
     "observation": {
       "eyebrow": "Under the same moon",
       "festivalFallback": "Using the real-time lunar phase following the UTC+8 timezone, independent of your device’s timezone.",
+      "explanationLink": "Real lunar phase. An imagined sea.",
       "summary": "Observation notes & calendar",
       "reference": "Reference sky: {referenceName} ({referenceLatitude}, {referenceLongitude}). ",
       "position": "{altitude}° altitude · {azimuth}° azimuth",
@@ -80,7 +81,8 @@
       "heading": "Let’s connect!",
       "paragraph": "For research conversations, questions, or a simple hello.",
       "emailButton": "Get in touch",
-      "linksButton": "Contact & professional links"
+      "linksButton": "Contact & professional links",
+      "missingEmail": "Email address to be added."
     }
   },
   "about": {
