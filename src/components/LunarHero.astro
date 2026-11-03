@@ -27,33 +27,9 @@ const copy = siteContent.hero;
   </div>
   <div class="hero-inner container">
     <div class="hero-topline">
-      <span class="eyebrow"><RichText text={copy.eyebrow} /></span><span
-        class="hero-coordinate"><RichText text={copy.coordinates} /></span
-      >
-    </div>
-    <div class="hero-portrait portrait-frame">
-      {
-        profile.portrait ? (
-          <img
-            src={profile.portrait}
-            alt={plain(siteContent.shared.portraitAlt)}
-            width="400"
-            height="480"
-          />
-        ) : (
-          <div class="portrait-placeholder">
-            <span aria-hidden="true">☾</span>
-            <span>
-              <RichText text={siteContent.home.introduction.photoPlaceholder} />
-            </span>
-          </div>
-        )
-      }
+      <span class="hero-coordinate"><RichText text={copy.coordinates} /></span>
     </div>
     <div class="hero-copy">
-      <p class="eyebrow hero-role">
-        <RichText text={copy.roleLine} />
-      </p>
       {
         profile.nameIsPlaceholder && (
           <span class="name-placeholder">
@@ -69,9 +45,32 @@ const copy = siteContent.hero;
       <p class="hero-subtitle">
         <RichText text={copy.subtitle} />
       </p>
-      <p class="hero-description">
-        <RichText text={copy.description} />
-      </p>
+      <div class="hero-bio">
+        <p class="hero-description">
+          <RichText text={copy.description} />
+        </p>
+        <div class="hero-portrait portrait-frame">
+          {
+            profile.portrait ? (
+              <img
+                src={profile.portrait}
+                alt={plain(siteContent.shared.portraitAlt)}
+                width="400"
+                height="480"
+              />
+            ) : (
+              <div class="portrait-placeholder">
+                <span aria-hidden="true">☾</span>
+                <span>
+                  <RichText
+                    text={siteContent.home.introduction.photoPlaceholder}
+                  />
+                </span>
+              </div>
+            )
+          }
+        </div>
+      </div>
       <div class="hero-actions">
         <div class="hero-primary-actions">
           <a class="button button-pink" href="/research/"

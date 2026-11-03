@@ -27,7 +27,7 @@
     "coordinates": "{referenceLatitude}   {referenceLongitude}",
     "roleLine": "Applied mathematics · {institution}",
     "namePlaceholder": "Name placeholder — personalize this space",
-    "subtitle": "Patterns in motion.\n*Possibilities in connection.*",
+    "subtitle": "Dynamical systems.\n*Reservoir computing.*",
     "description": "{role}, exploring dynamical systems, reservoir computing, and the structures behind learning.",
     "researchButton": "Explore my research",
     "publicationsButton": "Publications",
