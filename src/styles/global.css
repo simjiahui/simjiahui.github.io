@@ -378,7 +378,7 @@ select {
 }
 .hero-topline {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding-top: 34px;
 }
@@ -393,19 +393,26 @@ select {
   align-self: flex-start;
   padding-top: 3px;
 }
+.hero-bio {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 112px;
+  align-items: center;
+  gap: 24px;
+  max-width: 520px;
+}
+.hero-bio .hero-description {
+  margin: 0;
+}
 .lunar-hero .hero-portrait {
-  position: absolute;
-  right: 0;
-  bottom: 150px;
-  width: 180px;
-  padding: 9px;
+  width: 100%;
+  padding: 6px;
   border-color: #7d8296;
 }
 .hero-portrait .portrait-placeholder > span:first-child {
-  font-size: 3rem;
+  font-size: 2rem;
 }
 .hero-portrait .portrait-placeholder > span:last-child {
-  font-size: 0.55rem;
+  font-size: 0.45rem;
 }
 .hero-primary-actions {
   display: flex;
@@ -1413,14 +1420,6 @@ select {
   .hero-inner {
     min-height: 850px;
   }
-  .lunar-hero .hero-portrait {
-    top: 85px;
-    bottom: auto;
-    left: 0;
-    right: auto;
-    width: 110px;
-    padding: 6px;
-  }
   .hero-portrait .portrait-placeholder > span:first-child {
     font-size: 2rem;
   }
@@ -1618,6 +1617,10 @@ select {
   .hero-description {
     font-size: 0.78rem;
     max-width: 310px;
+  }
+  .hero-bio {
+    grid-template-columns: minmax(0, 1fr) 92px;
+    gap: 16px;
   }
   .hero-actions {
     gap: 17px;
