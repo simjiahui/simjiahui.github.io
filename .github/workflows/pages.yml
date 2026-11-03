@@ -20,9 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Build and upload with official Astro Pages action
-        uses: withastro/action@v3
+        uses: withastro/action@v6
         with:
           node-version: "24"
       - name: Check TypeScript and content schemas
@@ -41,7 +41,7 @@ jobs:
         run: npm run test:browser
       - name: Save screenshots and browser report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: browser-checks
           path: artifacts/
@@ -60,4 +60,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

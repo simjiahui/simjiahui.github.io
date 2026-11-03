@@ -110,9 +110,11 @@ const copy = siteContent.home;
                 <RichText text={copy.contact.linksButton} />{" "}
                 <span class="arrow-icon" aria-hidden="true" />
               </a>
-              <p class="content-note">
-                <RichText text={copy.contact.missingEmail} />
-              </p>
+              {copy.contact.missingEmail && (
+                <p class="content-note">
+                  <RichText text={copy.contact.missingEmail} />
+                </p>
+              )}
             </>
           </>
         )

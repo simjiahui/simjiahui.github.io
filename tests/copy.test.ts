@@ -65,6 +65,28 @@ test("central content validation rejects missing sections, wrong types, and typo
     false,
   );
 });
+test("optional observation link and missing-email notice can be omitted or blank", () => {
+  const content = structuredClone(siteContent);
+  const observation: Partial<typeof content.hero.observation> =
+    content.hero.observation;
+  const contact: Partial<typeof content.home.contact> = content.home.contact;
+  delete observation.explanationLink;
+  delete contact.missingEmail;
+  const parsed = siteContentSchema.parse(content);
+  assert.equal(parsed.hero.observation.explanationLink, "");
+  assert.equal(parsed.home.contact.missingEmail, "");
+  assert.equal(siteContentSchema.safeParse(parsed).success, true);
+  assert.equal(
+    siteContentSchema.safeParse({
+      ...parsed,
+      hero: {
+        ...parsed.hero,
+        observation: { ...parsed.hero.observation, explanationLink: 7 },
+      },
+    }).success,
+    false,
+  );
+});
 test("research relationships and journal filters retain unique stable identities", () => {
   const duplicate = structuredClone(siteContent);
   duplicate.research.themes.push({ ...duplicate.research.themes[0]! });

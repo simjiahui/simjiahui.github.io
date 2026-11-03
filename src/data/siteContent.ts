@@ -43,7 +43,7 @@ const contentShape = z.strictObject({
     observation: z.strictObject({
       eyebrow: z.string(),
       festivalFallback: z.string(),
-      explanationLink: z.string(),
+      explanationLink: z.string().default(""),
       summary: z.string(),
       reference: z.string(),
       position: z.string(),
@@ -88,7 +88,7 @@ const contentShape = z.strictObject({
       paragraph: z.string(),
       emailButton: z.string(),
       linksButton: z.string(),
-      missingEmail: z.string(),
+      missingEmail: z.string().default(""),
     }),
   }),
   about: z.strictObject({
