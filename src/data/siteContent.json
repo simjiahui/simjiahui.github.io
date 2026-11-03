@@ -32,12 +32,12 @@
     "researchButton": "Explore my research",
     "publicationsButton": "Publications",
     "cvButton": "CV",
-    "scrollCue": "A little further, a little deeper",
+    "scrollCue": "See more",
     "illumination": "{percent}% illuminated",
     "observation": {
       "eyebrow": "Under the same moon",
-      "festivalFallback": "A quiet moment under the same moon.",
-      "explanationLink": "Real lunar phase. An imagined sea.",
+      "festivalFallback": "Using the real-time lunar phase following the UTC+8 timezone, independent of your device’s timezone.",
+      // "explanationLink": "About the design",
       "summary": "Observation notes & calendar",
       "reference": "Reference sky: {referenceName} ({referenceLatitude}, {referenceLongitude}). ",
       "position": "{altitude}° altitude · {azimuth}° azimuth",
@@ -57,8 +57,8 @@
     },
     "research": {
       "eyebrow": "01 / Questions that guide me",
-      "heading": "Research, in four currents",
-      "link": "Explore the research"
+      "heading": "Research",
+      "link": "Explore"
     },
     "publications": {
       "eyebrow": "02 / Ideas into words",
@@ -68,7 +68,7 @@
     },
     "projects": {
       "eyebrow": "03 / From theory to practice",
-      "heading": "Things I am building",
+      "heading": "Things I'm building",
       "link": "View the project gallery"
     },
     "journal": {
@@ -78,11 +78,10 @@
     },
     "contact": {
       "eyebrow": "Good ideas begin with a conversation",
-      "heading": "Let’s find a\n*common rhythm.*",
+      "heading": "Let’s connect!",
       "paragraph": "For research conversations, questions, or a simple hello.",
       "emailButton": "Get in touch",
-      "linksButton": "Contact & professional links",
-      "missingEmail": "Email address to be added."
+      "linksButton": "Contact & professional links"
     }
   },
   "about": {
