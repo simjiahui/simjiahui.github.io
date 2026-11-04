@@ -87,7 +87,7 @@
   "about": {
     "meta": {
       "title": "About",
-      "description": "The researcher behind Moonlit Tides: applied mathematics, dynamical systems, and machine learning."
+      "description": "Hello!"
     },
     "heading": {
       "eyebrow": "05 / About",
@@ -96,7 +96,7 @@
     },
     "photoPlaceholder": "Portrait placeholder\nYour photograph belongs here",
     "greeting": "Hello, I’m",
-    "namePlaceholder": "Name placeholder",
+    "namePlaceholder": "Jia Hui",
     "journeyHeading": "My research journey",
     "journeyParagraph": "My work connects nonlinear dynamical systems, network structure, and data-driven methods. This space will grow with verified milestones, collaborations, and the questions that led from one idea to the next.",
     "educationHeading": "Academic background",
@@ -105,8 +105,8 @@
     "interestsHeading": "Beyond mathematics",
     "interestsEmpty": "A space for your interests, hobbies, and life outside research. Personal details to be added.",
     "gallery": {
-      "eyebrow": "A few things beyond the desk",
-      "heading": "A gallery, waiting to grow",
+      "eyebrow": "A few things beyond the lab",
+      "heading": "My gallery",
       "photoNumber": "Photograph {number}",
       "placeholder": "Image placeholder",
       "captionSuffix": " · placeholder"
