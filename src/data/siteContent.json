@@ -122,7 +122,7 @@
   "research": {
     "meta": {
       "title": "Research",
-      "description": "Research themes in reservoir computing, nonlinear dynamics, network geometry, and time-series forecasting."
+      "description": "My interests"
     },
     "heading": {
       "eyebrow": "01 / Research",
@@ -179,12 +179,12 @@
   "publications": {
     "meta": {
       "title": "Publications & talks",
-      "description": "Publications, preprints, posters, and academic talks. Verified records and downloadable citations."
+      "description": "Publications, preprints, posters, and academic talks."
     },
     "heading": {
       "eyebrow": "02 / Publications & talks",
       "title": "Ideas, shared",
-      "description": "Papers, preprints, presentations, and the conversations they begin. Every real entry here comes from a single shared academic record."
+      "description": "Papers, preprints, presentations, and the like."
     },
     "recordsLabel": "Publication records",
     "filters": {
