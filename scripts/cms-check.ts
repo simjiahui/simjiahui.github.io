@@ -142,12 +142,12 @@ try {
   assert.ok(home.includes("CMS edited projects"));
   assert.ok(home.includes("CMS project fixture"));
   assert.ok(home.includes("CMS footer fixture"));
-  assert.ok(home.includes("/images/orbits.svg"));
   const about = await readFile(
     join(directory, "dist/about/index.html"),
     "utf8",
   );
   assert.ok(about.includes("CMS biography fixture"));
+  assert.ok(about.includes("/images/orbits.svg"));
   assert.ok(about.includes("CMS photo caption"));
   assert.ok(
     !(await readFile(join(directory, "dist/rss.xml"), "utf8")).includes(
