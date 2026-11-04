@@ -11,6 +11,50 @@ import { parseCopy } from "../src/lib/copy";
 const read = (path: string) => JSON.parse(readFileSync(path, "utf8"));
 const config = YAML.parse(readFileSync(".pages.yml", "utf8"));
 
+interface CmsField {
+  name: string;
+  type: string;
+  required?: boolean;
+  list?: boolean | object;
+  fields?: CmsField[];
+  options?: { media?: string };
+}
+
+function checkMappings(
+  fields: CmsField[],
+  value: Record<string, any>,
+  path: string,
+) {
+  for (const field of fields) {
+    const fieldPath = `${path}.${field.name}`;
+    // Validate configuration even when an optional value is absent from this file.
+    if (field.type === "image")
+      assert.equal(field.options?.media, "photographs");
+    if (!Object.hasOwn(value, field.name)) {
+      assert.notEqual(field.required, true, `${fieldPath} has no data mapping`);
+      continue;
+    }
+    if (field.type !== "object") continue;
+    const nested = value[field.name];
+    if (field.list) {
+      assert.ok(Array.isArray(nested), `${fieldPath} must be a list`);
+      nested.forEach((item, index) => {
+        assert.ok(
+          item && typeof item === "object" && !Array.isArray(item),
+          `${fieldPath}[${index}] must be an object`,
+        );
+        checkMappings(field.fields ?? [], item, `${fieldPath}[${index}]`);
+      });
+    } else {
+      assert.ok(
+        nested && typeof nested === "object" && !Array.isArray(nested),
+        `${fieldPath} must be an object`,
+      );
+      checkMappings(field.fields ?? [], nested, fieldPath);
+    }
+  }
+}
+
 // Model Pages CMS 2.x's documented/observed save cleanup: false survives;
 // blank strings, nulls and empty object properties/lists do not.
 export function cmsSave(value: any): any {
@@ -75,20 +119,6 @@ test("CMS editors map existing nested keys, preserve shared files, and protect s
   assert.deepEqual(config.media[0].input, "public/images");
   assert.deepEqual(config.media[0].output, "/images");
   const names = new Set();
-  const check = (fields: any[], value: any, path: string) => {
-    for (const f of fields) {
-      assert.ok(
-        Object.hasOwn(value, f.name),
-        `${path}.${f.name} has no data mapping`,
-      );
-      const v = value[f.name];
-      if (f.type === "object") {
-        const items = f.list ? v : [v];
-        for (const item of items) check(f.fields, item, `${path}.${f.name}`);
-      }
-      if (f.type === "image") assert.equal(f.options.media, "photographs");
-    }
-  };
   for (const entry of config.content) {
     assert.ok(!names.has(entry.name));
     names.add(entry.name);
@@ -103,13 +133,93 @@ test("CMS editors map existing nested keys, preserve shared files, and protect s
     assert.equal(entry.format, "json");
     const data = read(entry.path);
     for (const item of entry.list ? data : [data])
-      check(entry.fields, item, entry.path);
+      checkMappings(entry.fields, item, entry.path);
   }
   assert.ok(
     !config.content.some(
       (e: any) => e.path === "src/data/referenceLocation.json",
     ),
   );
+});
+
+test("mapping checks allow missing optional fields but retain required checks in objects and lists", () => {
+  const fields: CmsField[] = [
+    { name: "optional", type: "text", required: false },
+    { name: "implicitOptional", type: "string" },
+    {
+      name: "group",
+      type: "object",
+      fields: [{ name: "title", type: "string", required: true }],
+    },
+    {
+      name: "items",
+      type: "object",
+      list: true,
+      fields: [{ name: "title", type: "string", required: true }],
+    },
+  ];
+  assert.doesNotThrow(() => checkMappings(fields, {}, "fixture"));
+  assert.doesNotThrow(() =>
+    checkMappings(fields, { group: { title: "" }, items: [] }, "fixture"),
+  );
+  assert.throws(
+    () => checkMappings(fields, { group: {} }, "fixture"),
+    /fixture\.group\.title has no data mapping/,
+  );
+  assert.throws(
+    () => checkMappings(fields, { items: [{}] }, "fixture"),
+    /fixture\.items\[0\]\.title has no data mapping/,
+  );
+  assert.throws(
+    () =>
+      checkMappings(
+        [{ name: "required", type: "string", required: true }],
+        {},
+        "fixture",
+      ),
+    /fixture\.required has no data mapping/,
+  );
+  assert.throws(() =>
+    checkMappings(
+      [{ name: "image", type: "image", options: { media: "wrong" } }],
+      {},
+      "fixture",
+    ),
+  );
+});
+
+test("empty optional copy survives CMS JSON saves without changing other content", () => {
+  const original = read("src/data/siteContent.json");
+  const about = config.content.find((entry: any) => entry.name === "about");
+  const footer = config.content.find(
+    (entry: any) => entry.name === "footer-contact",
+  );
+  const expected = structuredClone(siteContent);
+  expected.shared.biographyNote = "";
+  expected.home.contact.missingEmail = "";
+  for (const empty of ["", null, undefined]) {
+    const edited = structuredClone(original);
+    edited.shared.biographyNote = empty;
+    edited.home.contact.missingEmail = empty;
+    const saved = JSON.parse(JSON.stringify(cmsSave(edited)));
+    assert.equal(Object.hasOwn(saved.shared, "biographyNote"), false);
+    assert.equal(Object.hasOwn(saved.home.contact, "missingEmail"), false);
+    assert.doesNotThrow(() =>
+      checkMappings(about.fields, saved, "src/data/siteContent.json"),
+    );
+    assert.doesNotThrow(() =>
+      checkMappings(footer.fields, saved, "src/data/siteContent.json"),
+    );
+    assert.deepEqual(siteContentSchema.parse(saved), expected);
+  }
+  const missingRequired = structuredClone(original);
+  delete missingRequired.shared.biography;
+  assert.throws(
+    () =>
+      checkMappings(about.fields, missingRequired, "src/data/siteContent.json"),
+    /shared\.biography has no data mapping/,
+  );
+  assert.equal(siteContentSchema.safeParse(missingRequired).success, false);
 });
 
 test("journal controls retain Markdown frontmatter/body and safe publication defaults", () => {

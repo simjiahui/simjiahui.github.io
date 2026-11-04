@@ -917,7 +917,8 @@ content:
               - name: missingEmail
                 label: Missing Email
                 type: string
-                required: true
+                required: false
+                default: ""
   - name: other-pages
     label: Other page headings and labels
     type: file
