@@ -1,13 +1,12 @@
 {
   "name": "Sim Jia Hui",
   "nameIsPlaceholder": false,
-  "siteTitle": "Moonlit Tides",
+  "siteTitle": "Sim Jia Hui",
   "role": "PhD student in applied mathematics",
   "institution": "Tohoku University",
   "location": "Sendai, Japan",
-  "email": "",
-  "portrait": "",
-  "interests": [],
+  "email": "sim.jia.hui.s6@dc.tohoku.ac.jp",
+  "portrait": "/images/img6898.jpg",
   "links": [
     {
       "label": "GitHub",
@@ -50,18 +49,12 @@
   ],
   "gallery": [
     {
-      "src": "",
-      "alt": "",
       "caption": "A place you love"
     },
     {
-      "src": "",
-      "alt": "",
       "caption": "A moment worth keeping"
     },
     {
-      "src": "",
-      "alt": "",
       "caption": "Life beyond equations"
     }
   ]
