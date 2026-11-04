@@ -27,8 +27,7 @@ content:
       rename: false
       delete: false
     description: "Formatting: use Enter for line breaks and *words* for italics. The old introduction
-      section is retained for its portrait placeholder and About link; its heading/paragraph are
-      currently inactive."
+      text is retained in the data; this editor exposes only its About link."
     fields:
       - name: hero
         label: Hero
@@ -69,16 +68,10 @@ content:
         required: true
         fields:
           - name: introduction
-            label: Portrait placeholder and About link
+            label: About link
             type: object
             required: true
             fields:
-              - name: photoPlaceholder
-                label: Photo Placeholder
-                type: text
-                required: true
-                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
-                  {placeholders} unchanged. Do not paste HTML.
               - name: aboutLink
                 label: About Link
                 type: string
@@ -359,8 +352,8 @@ content:
       create: false
       rename: false
       delete: false
-    description: Upload your portrait here; it is shared by the hero, About page, and CV identity. The
-      gallery stores objects with image, alternative text, and caption, not an array of image URLs.
+    description: Your portrait is displayed on the About page. Identity details also supply the CV.
+      The gallery stores objects with image, alternative text, and caption, not an array of image URLs.
     fields:
       - name: name
         label: Your name

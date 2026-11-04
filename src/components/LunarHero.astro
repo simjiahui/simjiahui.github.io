@@ -1,7 +1,7 @@
 ---
 import { profile } from "../data";
 import RichText from "../components/RichText.astro";
-import { siteContent, text, plain } from "../data/siteContent";
+import { siteContent, text } from "../data/siteContent";
 import { CALENDAR_ZONE, moonState } from "../lib/astronomy";
 import { staticScene } from "../lib/ascii";
 const state = moonState();
@@ -45,32 +45,9 @@ const copy = siteContent.hero;
       <p class="hero-subtitle">
         <RichText text={copy.subtitle} />
       </p>
-      <div class="hero-bio">
-        <p class="hero-description">
-          <RichText text={copy.description} />
-        </p>
-        <div class="hero-portrait portrait-frame">
-          {
-            profile.portrait ? (
-              <img
-                src={profile.portrait}
-                alt={plain(siteContent.shared.portraitAlt)}
-                width="400"
-                height="480"
-              />
-            ) : (
-              <div class="portrait-placeholder">
-                <span aria-hidden="true">☾</span>
-                <span>
-                  <RichText
-                    text={siteContent.home.introduction.photoPlaceholder}
-                  />
-                </span>
-              </div>
-            )
-          }
-        </div>
-      </div>
+      <p class="hero-description">
+        <RichText text={copy.description} />
+      </p>
       <div class="hero-actions">
         <div class="hero-primary-actions">
           <a class="button button-pink" href="/research/"
@@ -122,14 +99,7 @@ const copy = siteContent.hero;
       ><span data-festival data-fallback={copy.observation.festivalFallback}
         >{state.calendar.festival ?? copy.observation.festivalFallback}</span
       >
-    </p>{
-      copy.observation.explanationLink && (
-        <a href="/colophon/#lunar-scene">
-          <RichText text={copy.observation.explanationLink} />{" "}
-          <span class="arrow-icon" aria-hidden="true" />
-        </a>
-      )
-    }
+    </p>
   </div>
 </div>
 <details class="observation-details container">

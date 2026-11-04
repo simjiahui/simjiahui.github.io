@@ -29,7 +29,7 @@ Do not edit `main` directly in the dashboard: a save there can immediately trigg
 
 | Dashboard editor | What to edit | Repository data |
 | --- | --- | --- |
-| **Homepage text and headings** | Hero subtitle and description, buttons, homepage section headings, About link, portrait placeholder | Relevant fields in `src/data/siteContent.json` |
+| **Homepage text and headings** | Hero subtitle and description, buttons, homepage section headings and About link | Relevant fields in `src/data/siteContent.json` |
 | **About Me and biography** | Shared biography, personal note, About page wording | `shared` and `about` in `src/data/siteContent.json` |
 | **Identity, photographs and social links** | Name, role, institution, personal location, email, portrait, interests, social links, gallery | `src/data/profile.json` |
 | **Publications and academic experience** | Ordered authors, publication dates/types, education, positions, citations, featured and placeholder toggles | `src/data/academic.json` |
@@ -55,7 +55,7 @@ The dashboard writes the newline and asterisks into the existing string fields. 
 ## Add photographs
 
 1. Choose **Photographs and media** and upload a JPG, PNG, WebP, GIF or SVG. Prefer small, descriptive filenames; the CMS makes names URL-safe. Upload only trusted SVG files.
-2. Open the relevant **Portrait photograph**, **Project image**, **Cover photograph**, or gallery **Photograph** picker and select the uploaded file. Uploading alone does not insert it into a page.
+2. Open the relevant **Portrait photograph**, **Project image**, **Cover photograph**, or gallery **Photograph** picker and select the uploaded file. Uploading alone does not insert it into a page. The portrait appears on About, not on the homepage.
 3. Add alternative text describing the picture. The portrait alternative text is in **About Me and biography → Shared → Portrait Alt**; each gallery and article cover has its own field.
 4. Save on the same working branch. URLs must look like `/images/my-photo.jpg`, not `public/images/my-photo.jpg`. An empty portrait/gallery image retains the existing placeholder behavior.
 
