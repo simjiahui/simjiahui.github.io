@@ -1,0 +1,1642 @@
+# Pages CMS 2.x — https://pagescms.org/docs/configuration/
+# Preserve merge mode: focused editors share siteContent.json.
+media:
+  - name: photographs
+    label: Photographs and media
+    input: public/images
+    output: /images
+    extensions:
+      - jpg
+      - jpeg
+      - png
+      - webp
+      - gif
+      - svg
+    rename: safe
+settings:
+  content:
+    merge: true
+content:
+  - name: homepage
+    label: Homepage text and headings
+    type: file
+    path: src/data/siteContent.json
+    format: json
+    operations:
+      create: false
+      rename: false
+      delete: false
+    description: "Formatting: use Enter for line breaks and *words* for italics. The old introduction
+      section is retained for its portrait placeholder and About link; its heading/paragraph are
+      currently inactive."
+    fields:
+      - name: hero
+        label: Hero
+        type: object
+        required: true
+        fields:
+          - name: subtitle
+            label: Subtitle
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: description
+            label: Description
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: researchButton
+            label: Research Button
+            type: string
+            required: true
+          - name: publicationsButton
+            label: Publications Button
+            type: string
+            required: true
+          - name: cvButton
+            label: Cv Button
+            type: string
+            required: true
+          - name: scrollCue
+            label: Scroll Cue
+            type: string
+            required: true
+      - name: home
+        label: Homepage sections
+        type: object
+        required: true
+        fields:
+          - name: introduction
+            label: Portrait placeholder and About link
+            type: object
+            required: true
+            fields:
+              - name: photoPlaceholder
+                label: Photo Placeholder
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+              - name: aboutLink
+                label: About Link
+                type: string
+                required: true
+          - name: research
+            label: Research
+            type: object
+            required: true
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+                required: true
+              - name: heading
+                label: Heading
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+              - name: link
+                label: Link
+                type: string
+                required: true
+          - name: publications
+            label: Publications
+            type: object
+            required: true
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+                required: true
+              - name: heading
+                label: Heading
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+              - name: link
+                label: Link
+                type: string
+                required: true
+              - name: emptyNote
+                label: Empty Note
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+          - name: projects
+            label: Projects
+            type: object
+            required: true
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+                required: true
+              - name: heading
+                label: Heading
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+              - name: link
+                label: Link
+                type: string
+                required: true
+          - name: journal
+            label: Journal
+            type: object
+            required: true
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+                required: true
+              - name: heading
+                label: Heading
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+              - name: link
+                label: Link
+                type: string
+                required: true
+  - name: about
+    label: About Me and biography
+    type: file
+    path: src/data/siteContent.json
+    format: json
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: shared
+        label: Shared
+        type: object
+        required: true
+        fields:
+          - name: biography
+            label: Biography
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: biographyNote
+            label: Biography Note
+            type: text
+            required: false
+            default: ""
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: portraitAlt
+            label: Portrait Alt
+            type: string
+            required: true
+      - name: about
+        label: About
+        type: object
+        required: true
+        fields:
+          - name: meta
+            label: Meta
+            type: object
+            required: true
+            fields:
+              - name: title
+                label: Title
+                type: string
+                required: true
+              - name: description
+                label: Description
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+          - name: heading
+            label: Heading
+            type: object
+            required: true
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+                required: true
+              - name: title
+                label: Title
+                type: string
+                required: true
+              - name: description
+                label: Description
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+          - name: photoPlaceholder
+            label: Photo Placeholder
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: greeting
+            label: Greeting
+            type: string
+            required: true
+          - name: namePlaceholder
+            label: Name Placeholder
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: journeyHeading
+            label: Journey Heading
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: journeyParagraph
+            label: Journey Paragraph
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: educationHeading
+            label: Education Heading
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: educationEmpty
+            label: Education Empty
+            type: string
+            required: true
+          - name: experienceHeading
+            label: Experience Heading
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: interestsHeading
+            label: Interests Heading
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: interestsEmpty
+            label: Interests Empty
+            type: string
+            required: true
+          - name: gallery
+            label: Gallery
+            type: object
+            required: true
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+                required: true
+              - name: heading
+                label: Heading
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+              - name: photoNumber
+                label: Photo Number
+                type: string
+                required: true
+              - name: placeholder
+                label: Placeholder
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+              - name: captionSuffix
+                label: Caption Suffix
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+          - name: contact
+            label: Contact
+            type: object
+            required: true
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+                required: true
+              - name: heading
+                label: Heading
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+              - name: paragraph
+                label: Paragraph
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+              - name: cvLink
+                label: Cv Link
+                type: string
+                required: true
+              - name: missingEmail
+                label: Missing Email
+                type: string
+                required: true
+  - name: profile
+    label: Identity, photographs and social links
+    type: file
+    path: src/data/profile.json
+    format: json
+    operations:
+      create: false
+      rename: false
+      delete: false
+    description: Upload your portrait here; it is shared by the hero, About page, and CV identity. The
+      gallery stores objects with image, alternative text, and caption, not an array of image URLs.
+    fields:
+      - name: name
+        label: Your name
+        type: string
+        required: true
+        default: ""
+      - name: nameIsPlaceholder
+        label: Name is a sample
+        type: boolean
+        default: false
+      - name: siteTitle
+        label: Website title
+        type: string
+        required: true
+        default: ""
+      - name: role
+        label: Role
+        type: string
+        required: true
+        default: ""
+      - name: institution
+        label: Institution
+        type: string
+        required: true
+        default: ""
+      - name: location
+        label: Personal location
+        type: string
+        required: true
+        default: ""
+        description: Biography location only; astronomical reference coordinates are separate and unchanged.
+      - name: email
+        label: Contact email
+        type: string
+        required: false
+        default: ""
+        pattern: ^([^\s@]+@[^\s@]+\.[^\s@]+|)$
+      - name: portrait
+        label: Portrait photograph
+        type: image
+        options:
+          media: photographs
+        description: Upload/select an image. Add descriptive alternative text. Leave empty to use the
+          existing placeholder.
+      - name: interests
+        label: Interests
+        type: string
+        list: true
+        default: []
+      - name: links
+        label: Social and professional links
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title} {institution}"
+        fields:
+          - name: label
+            label: Link label
+            type: string
+            required: true
+            default: ""
+          - name: url
+            label: URL
+            type: string
+            required: true
+            default: ""
+            pattern: ^https?://\S+$
+      - name: gallery
+        label: Photo gallery
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title} {institution}"
+        fields:
+          - name: src
+            label: Photograph
+            type: image
+            options:
+              media: photographs
+            description: Upload/select an image. Add descriptive alternative text. Leave empty to use the
+              existing placeholder.
+          - name: alt
+            label: Alternative text
+            type: string
+            required: false
+            default: ""
+          - name: caption
+            label: Caption
+            type: text
+            required: false
+            default: ""
+  - name: academic
+    label: Publications and academic experience
+    type: file
+    path: src/data/academic.json
+    format: json
+    operations:
+      create: false
+      rename: false
+      delete: false
+    description: The PDF CV is generated automatically from this data. Leave placeholder enabled until
+      every record is verified. IDs must be unique.
+    fields:
+      - name: education
+        label: Education
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title} {institution}"
+        fields:
+          - name: title
+            label: Qualification
+            type: string
+            required: true
+            default: ""
+          - name: institution
+            label: Institution
+            type: string
+            required: true
+            default: ""
+          - name: start
+            label: Start year / date
+            type: string
+            required: true
+            default: ""
+          - name: end
+            label: End year / Present
+            type: string
+            required: true
+            default: ""
+          - name: description
+            label: Description
+            type: text
+            required: false
+            default: ""
+      - name: experience
+        label: Academic experience
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title} {institution}"
+        fields:
+          - name: title
+            label: Position
+            type: string
+            required: true
+            default: ""
+          - name: institution
+            label: Institution
+            type: string
+            required: true
+            default: ""
+          - name: start
+            label: Start year / date
+            type: string
+            required: true
+            default: ""
+          - name: end
+            label: End year / Present
+            type: string
+            required: true
+            default: ""
+          - name: description
+            label: Description
+            type: text
+            required: false
+            default: ""
+      - name: publications
+        label: Publications and talks
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title} {institution}"
+        fields:
+          - name: id
+            label: Stable ID
+            type: string
+            required: true
+            default: ""
+            pattern:
+              regex: ^[a-z0-9-]+$
+              message: Use lowercase letters, numbers, and hyphens; keep existing IDs stable.
+          - name: type
+            label: Publication type
+            type: select
+            required: true
+            options:
+              values:
+                - journal
+                - conference
+                - preprint
+                - poster
+                - talk
+                - seminar
+              multiple: false
+          - name: title
+            label: Title
+            type: string
+            required: true
+            default: ""
+          - name: authors
+            label: Authors (in order)
+            type: string
+            required: true
+            list:
+              min: 1
+              collapsible: false
+          - name: venue
+            label: Venue
+            type: string
+            required: true
+            default: ""
+          - name: date
+            label: Publication date
+            type: date
+            required: true
+            options:
+              format: yyyy-MM-dd
+              time: false
+          - name: status
+            label: Status
+            type: string
+            required: true
+            default: ""
+          - name: placeholder
+            label: Sample / placeholder (excluded from CV)
+            type: boolean
+            default: true
+          - name: featured
+            label: Show on homepage
+            type: boolean
+            default: false
+          - name: themes
+            label: Related research themes
+            type: select
+            required: false
+            options:
+              values:
+                - reservoir
+                - dynamics
+                - networks
+                - forecasting
+              multiple: true
+            default: []
+          - name: doi
+            label: DOI identifier
+            type: string
+            required: false
+            default: ""
+            pattern: ^(10\.\d{4,9}/\S+|)$
+            description: Identifier only, e.g. 10.1234/example; not a DOI URL.
+          - name: arxiv
+            label: arXiv identifier
+            type: string
+            required: false
+            default: ""
+            pattern: ^(\d{4}\.\d{4,5}(v\d+)?|[a-z-]+(\.[A-Z]{2})?/\d{7}(v\d+)?|)$
+          - name: pdf
+            label: Pdf URL
+            type: string
+            required: false
+            default: ""
+            pattern:
+              regex: ^(https?://\S+|/(?!/)\S*|)$
+              message: Use an HTTPS URL, /local/path, or leave empty.
+          - name: code
+            label: Code URL
+            type: string
+            required: false
+            default: ""
+            pattern:
+              regex: ^(https?://\S+|/(?!/)\S*|)$
+              message: Use an HTTPS URL, /local/path, or leave empty.
+          - name: slides
+            label: Slides URL
+            type: string
+            required: false
+            default: ""
+            pattern:
+              regex: ^(https?://\S+|/(?!/)\S*|)$
+              message: Use an HTTPS URL, /local/path, or leave empty.
+          - name: bibtex
+            label: BibTeX citation
+            type: text
+            required: false
+            default: ""
+  - name: projects
+    label: Featured GitHub projects
+    type: file
+    path: src/data/projects.cms.json
+    format: json
+    operations:
+      create: false
+      rename: false
+      delete: false
+    description: This safe object-shaped editor is authoritative. The build generates the existing
+      projects.json array; an empty list is supported.
+    fields:
+      - name: projects
+        label: Project cards
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title} {institution}"
+        fields:
+          - name: id
+            label: Stable ID
+            type: string
+            required: true
+            default: ""
+            pattern:
+              regex: ^[a-z0-9-]+$
+              message: Use lowercase letters, numbers, and hyphens; keep existing IDs stable.
+          - name: title
+            label: Project title
+            type: string
+            required: true
+            default: ""
+          - name: description
+            label: Short description
+            type: text
+            required: true
+            default: ""
+          - name: technologies
+            label: Technologies
+            type: string
+            list: true
+            default: []
+          - name: repository
+            label: GitHub repository URL
+            type: string
+            required: false
+            default: ""
+            pattern: ^(https://github\.com/[\w.-]+/[\w.-]+/?|)$
+          - name: demo
+            label: Demo URL
+            type: string
+            required: false
+            default: ""
+            pattern: ^(https?://\S+|/(?!/)\S*|)$
+          - name: image
+            label: Project image
+            type: image
+            options:
+              media: photographs
+            description: Upload/select an image. Add descriptive alternative text. Leave empty to use the
+              existing placeholder.
+          - name: publication
+            label: Related publication ID
+            type: string
+            required: false
+            default: ""
+            description: Existing ID from Publications, or leave blank.
+          - name: themes
+            label: Related research themes
+            type: select
+            required: false
+            options:
+              values:
+                - reservoir
+                - dynamics
+                - networks
+                - forecasting
+              multiple: true
+            default: []
+          - name: featured
+            label: Show on homepage
+            type: boolean
+            default: false
+          - name: placeholder
+            label: Sample / placeholder
+            type: boolean
+            default: true
+        default: []
+  - name: journal
+    label: Journal / blog articles
+    type: collection
+    path: src/content/journal
+    format: yaml-frontmatter
+    subfolders: false
+    filename:
+      template: "{primary}.md"
+      field: create
+    operations:
+      create: true
+      rename: false
+      delete: false
+    view:
+      primary: title
+      fields:
+        - title
+        - date
+        - category
+        - draft
+      sort:
+        - date
+        - title
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Article title
+        type: string
+        required: true
+        default: ""
+      - name: description
+        label: Short summary
+        type: text
+        required: true
+        default: ""
+      - name: date
+        label: Publication date
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+          time: false
+      - name: category
+        label: Category
+        type: select
+        required: true
+        options:
+          values:
+            - Research Notes
+            - Conferences & Travel
+            - Mathematics
+            - Life & Other Things
+          multiple: false
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+        default: []
+      - name: cover
+        label: Cover photograph
+        type: image
+        options:
+          media: photographs
+        description: Upload/select an image. Add descriptive alternative text. Leave empty to use the
+          existing placeholder.
+      - name: coverAlt
+        label: Cover alternative text
+        type: string
+        required: false
+        default: ""
+      - name: sample
+        label: Sample / demonstration article
+        type: boolean
+        default: false
+      - name: draft
+        label: Draft — hide from the website
+        type: boolean
+        default: true
+      - name: body
+        label: Article body
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+          switcher: true
+          media: photographs
+        description: Use Editor for normal prose. Use Source mode for existing LaTeX, code fences, or
+          unsupported Markdown; inspect the PR diff before merging.
+  - name: footer-contact
+    label: Footer and contact information
+    type: file
+    path: src/data/siteContent.json
+    format: json
+    operations:
+      create: false
+      rename: false
+      delete: false
+    description: Your actual email and social URLs are under Identity, photographs and social links.
+    fields:
+      - name: shared
+        label: Shared
+        type: object
+        required: true
+        fields:
+          - name: footer
+            label: Footer
+            type: object
+            required: true
+            fields:
+              - name: description
+                label: Description
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+              - name: linksHeading
+                label: Links Heading
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+              - name: privacy
+                label: Privacy
+                type: string
+                required: true
+              - name: colophonLink
+                label: Colophon Link
+                type: string
+                required: true
+          - name: emailLabel
+            label: Email Label
+            type: string
+            required: true
+          - name: cvLabel
+            label: Cv Label
+            type: string
+            required: true
+      - name: home
+        label: Homepage
+        type: object
+        required: true
+        fields:
+          - name: contact
+            label: Contact
+            type: object
+            required: true
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+                required: true
+              - name: heading
+                label: Heading
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+              - name: paragraph
+                label: Paragraph
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+              - name: emailButton
+                label: Email Button
+                type: string
+                required: true
+              - name: linksButton
+                label: Links Button
+                type: string
+                required: true
+              - name: missingEmail
+                label: Missing Email
+                type: string
+                required: true
+  - name: other-pages
+    label: Other page headings and labels
+    type: file
+    path: src/data/siteContent.json
+    format: json
+    operations:
+      create: false
+      rename: false
+      delete: false
+    description: Scientific explanations, reference coordinates, and hidden templates are preserved by
+      merge mode and intentionally not exposed.
+    fields:
+      - name: research
+        label: Research
+        type: object
+        required: true
+        fields:
+          - name: meta
+            label: Meta
+            type: object
+            required: true
+            fields:
+              - name: title
+                label: Title
+                type: string
+                required: true
+              - name: description
+                label: Description
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+          - name: heading
+            label: Heading
+            type: object
+            required: true
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+                required: true
+              - name: title
+                label: Title
+                type: string
+                required: true
+              - name: description
+                label: Description
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+          - name: relatedHeading
+            label: Related Heading
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: relatedEmpty
+            label: Related Empty
+            type: string
+            required: true
+          - name: illustrationAlt
+            label: Illustration Alt
+            type: string
+            required: true
+          - name: illustrationCaption
+            label: Illustration Caption
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: themes
+            label: Themes
+            type: object
+            list:
+              min: 4
+              max: 4
+              collapsible:
+                collapsed: true
+                summary: "{title} {label}"
+            fields:
+              - name: id
+                label: Id
+                type: string
+                required: true
+                readonly: true
+              - name: number
+                label: Number
+                type: string
+                required: true
+                readonly: true
+              - name: title
+                label: Title
+                type: string
+                required: true
+              - name: subtitle
+                label: Subtitle
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+              - name: description
+                label: Description
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+              - name: math
+                label: Math
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+                readonly: true
+              - name: caption
+                label: Caption
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+              - name: image
+                label: Image
+                type: string
+                required: true
+            required: true
+      - name: publications
+        label: Publications
+        type: object
+        required: true
+        fields:
+          - name: meta
+            label: Meta
+            type: object
+            required: true
+            fields:
+              - name: title
+                label: Title
+                type: string
+                required: true
+              - name: description
+                label: Description
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+          - name: heading
+            label: Heading
+            type: object
+            required: true
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+                required: true
+              - name: title
+                label: Title
+                type: string
+                required: true
+              - name: description
+                label: Description
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+          - name: recordsLabel
+            label: Records Label
+            type: string
+            required: true
+          - name: filters
+            label: Filters
+            type: object
+            required: true
+            fields:
+              - name: type
+                label: Type
+                type: string
+                required: true
+              - name: allTypes
+                label: All Types
+                type: string
+                required: true
+              - name: journal
+                label: Journal
+                type: string
+                required: true
+              - name: conference
+                label: Conference
+                type: string
+                required: true
+              - name: preprint
+                label: Preprint
+                type: string
+                required: true
+              - name: poster
+                label: Poster
+                type: string
+                required: true
+              - name: talk
+                label: Talk
+                type: string
+                required: true
+              - name: seminar
+                label: Seminar
+                type: string
+                required: true
+              - name: year
+                label: Year
+                type: string
+                required: true
+              - name: allYears
+                label: All Years
+                type: string
+                required: true
+              - name: sampleYear
+                label: Sample Year
+                type: string
+                required: true
+              - name: one
+                label: One
+                type: string
+                required: true
+              - name: many
+                label: Many
+                type: string
+                required: true
+          - name: noMatches
+            label: No Matches
+            type: string
+            required: true
+          - name: emptyHeading
+            label: Empty Heading
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: emptyParagraph
+            label: Empty Paragraph
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: cvPrompt
+            label: Cv Prompt
+            type: string
+            required: true
+          - name: cvLink
+            label: Cv Link
+            type: string
+            required: true
+          - name: card
+            label: Card
+            type: object
+            required: true
+            fields:
+              - name: sampleYear
+                label: Sample Year
+                type: string
+                required: true
+              - name: placeholder
+                label: Placeholder
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+              - name: types
+                label: Types
+                type: object
+                required: true
+                fields:
+                  - name: journal
+                    label: Journal
+                    type: string
+                    required: true
+                  - name: conference
+                    label: Conference
+                    type: string
+                    required: true
+                  - name: preprint
+                    label: Preprint
+                    type: string
+                    required: true
+                  - name: poster
+                    label: Poster
+                    type: string
+                    required: true
+                  - name: talk
+                    label: Talk
+                    type: string
+                    required: true
+                  - name: seminar
+                    label: Seminar
+                    type: string
+                    required: true
+              - name: doi
+                label: Doi
+                type: string
+                required: true
+              - name: arxiv
+                label: Arxiv
+                type: string
+                required: true
+              - name: pdf
+                label: Pdf
+                type: string
+                required: true
+              - name: code
+                label: Code
+                type: string
+                required: true
+              - name: slides
+                label: Slides
+                type: string
+                required: true
+              - name: bibtexSummary
+                label: Bibtex Summary
+                type: string
+                required: true
+              - name: copy
+                label: Copy
+                type: string
+                required: true
+              - name: download
+                label: Download
+                type: string
+                required: true
+              - name: copied
+                label: Copied
+                type: string
+                required: true
+              - name: copyFailed
+                label: Copy Failed
+                type: string
+                required: true
+      - name: projects
+        label: Projects
+        type: object
+        required: true
+        fields:
+          - name: meta
+            label: Meta
+            type: object
+            required: true
+            fields:
+              - name: title
+                label: Title
+                type: string
+                required: true
+              - name: description
+                label: Description
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+          - name: heading
+            label: Heading
+            type: object
+            required: true
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+                required: true
+              - name: title
+                label: Title
+                type: string
+                required: true
+              - name: description
+                label: Description
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+          - name: listLabel
+            label: List Label
+            type: string
+            required: true
+          - name: sampleNote
+            label: Sample Note
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: card
+            label: Card
+            type: object
+            required: true
+            fields:
+              - name: imageAlt
+                label: Image Alt
+                type: string
+                required: true
+              - name: sample
+                label: Sample
+                type: string
+                required: true
+              - name: sampleEyebrow
+                label: Sample Eyebrow
+                type: string
+                required: true
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+                required: true
+              - name: technologiesLabel
+                label: Technologies Label
+                type: string
+                required: true
+              - name: repository
+                label: Repository
+                type: string
+                required: true
+              - name: demo
+                label: Demo
+                type: string
+                required: true
+              - name: publication
+                label: Publication
+                type: string
+                required: true
+              - name: publicRepository
+                label: Public Repository
+                type: string
+                required: true
+              - name: stars
+                label: Stars
+                type: string
+                required: true
+      - name: journal
+        label: Journal
+        type: object
+        required: true
+        fields:
+          - name: meta
+            label: Meta
+            type: object
+            required: true
+            fields:
+              - name: title
+                label: Title
+                type: string
+                required: true
+              - name: description
+                label: Description
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+          - name: heading
+            label: Heading
+            type: object
+            required: true
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+                required: true
+              - name: title
+                label: Title
+                type: string
+                required: true
+              - name: description
+                label: Description
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+          - name: articlesLabel
+            label: Articles Label
+            type: string
+            required: true
+          - name: categoryLabel
+            label: Category Label
+            type: string
+            required: true
+          - name: allCategories
+            label: All Categories
+            type: string
+            required: true
+          - name: categories
+            label: Categories
+            type: object
+            list:
+              min: 4
+              max: 4
+              collapsible:
+                collapsed: true
+                summary: "{title} {label}"
+            fields:
+              - name: value
+                label: Value
+                type: string
+                required: true
+                readonly: true
+              - name: label
+                label: Label
+                type: string
+                required: true
+            required: true
+          - name: one
+            label: One
+            type: string
+            required: true
+          - name: many
+            label: Many
+            type: string
+            required: true
+          - name: rssLink
+            label: Rss Link
+            type: string
+            required: true
+          - name: empty
+            label: Empty
+            type: string
+            required: true
+          - name: sampleCard
+            label: Sample Card
+            type: string
+            required: true
+          - name: article
+            label: Article
+            type: object
+            required: true
+            fields:
+              - name: backLink
+                label: Back Link
+                type: string
+                required: true
+              - name: sample
+                label: Sample
+                type: string
+                required: true
+              - name: tagsLabel
+                label: Tags Label
+                type: string
+                required: true
+              - name: thanks
+                label: Thanks
+                type: string
+                required: true
+              - name: moreLink
+                label: More Link
+                type: string
+                required: true
+          - name: rss
+            label: Rss
+            type: object
+            required: true
+            fields:
+              - name: title
+                label: Title
+                type: string
+                required: true
+              - name: description
+                label: Description
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+              - name: samplePrefix
+                label: Sample Prefix
+                type: string
+                required: true
+      - name: cv
+        label: Cv
+        type: object
+        required: true
+        fields:
+          - name: meta
+            label: Meta
+            type: object
+            required: true
+            fields:
+              - name: title
+                label: Title
+                type: string
+                required: true
+              - name: description
+                label: Description
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+          - name: heading
+            label: Heading
+            type: object
+            required: true
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+                required: true
+              - name: title
+                label: Title
+                type: string
+                required: true
+              - name: description
+                label: Description
+                type: text
+                required: true
+                description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+                  {placeholders} unchanged. Do not paste HTML.
+          - name: draft
+            label: Draft
+            type: string
+            required: true
+          - name: description
+            label: Description
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: download
+            label: Download
+            type: string
+            required: true
+          - name: downloadFormat
+            label: Download Format
+            type: string
+            required: true
+          - name: recordNote
+            label: Record Note
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: contentsLabel
+            label: Contents Label
+            type: string
+            required: true
+          - name: paperEyebrow
+            label: Paper Eyebrow
+            type: string
+            required: true
+          - name: interestsHeading
+            label: Interests Heading
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: interests
+            label: Interests
+            type: string
+            required: true
+          - name: recordsHeading
+            label: Records Heading
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: educationCount
+            label: Education Count
+            type: string
+            required: true
+          - name: experienceCount
+            label: Experience Count
+            type: string
+            required: true
+          - name: publicationCount
+            label: Publication Count
+            type: string
+            required: true
+          - name: talkCount
+            label: Talk Count
+            type: string
+            required: true
+          - name: generatedNote
+            label: Generated Note
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+      - name: notFound
+        label: Not Found
+        type: object
+        required: true
+        fields:
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+            required: true
+          - name: heading
+            label: Heading
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: description
+            label: Description
+            type: text
+            required: true
+            description: Enter real line breaks for new lines and *single asterisks* for italics. Keep
+              {placeholders} unchanged. Do not paste HTML.
+          - name: homeLink
+            label: Home Link
+            type: string
+            required: true
+          - name: journalLink
+            label: Journal Link
+            type: string
+            required: true
+  - name: projects-output
+    label: Generated projects array (read only)
+    type: file
+    path: src/data/projects.json
+    format: code
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: body
+        label: Generated JSON (view only)
+        type: code
+        readonly: true
+        options:
+          format: json
+    description: Build-generated array for compatibility. Edit Featured GitHub projects instead. Changes
+      here are overwritten from projects.cms.json.

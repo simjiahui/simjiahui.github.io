@@ -66,9 +66,9 @@ const entry = z.object({
 });
 export const academicSchema = z
   .object({
-    education: z.array(entry),
-    experience: z.array(entry),
-    publications: z.array(publicationSchema),
+    education: z.array(entry).default([]),
+    experience: z.array(entry).default([]),
+    publications: z.array(publicationSchema).default([]),
   })
   .superRefine((data, ctx) => {
     if (
@@ -85,17 +85,23 @@ export const projectsSchema = z.array(
     id: z.string().regex(/^[a-z0-9-]+$/),
     title: z.string(),
     description: z.string(),
-    technologies: z.array(z.string()),
-    repository: z.union([
-      z.literal(""),
-      z.string().regex(/^https:\/\/github\.com\/[\w.-]+\/[\w.-]+\/?$/),
-    ]),
-    demo: link,
-    image: link,
-    publication: z.string(),
-    themes: z.array(z.string()),
+    technologies: z.array(z.string()).default([]),
+    repository: z
+      .union([
+        z.literal(""),
+        z.string().regex(/^https:\/\/github\.com\/[\w.-]+\/[\w.-]+\/?$/),
+      ])
+      .default(""),
+    demo: link.default(""),
+    image: link.default(""),
+    publication: z.string().default(""),
+    themes: z.array(z.string()).default([]),
     featured: z.boolean(),
     placeholder: z.boolean(),
   }),
 );
+// Pages CMS strips empty values; an object wrapper can safely represent no projects.
+export const projectCatalogSchema = z.strictObject({
+  projects: projectsSchema.default([]),
+});
 export type Publication = z.infer<typeof publicationSchema>;

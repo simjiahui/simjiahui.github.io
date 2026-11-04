@@ -5,6 +5,13 @@ import { readFile, writeFile } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
 import assert from "node:assert/strict";
 
+import { academic } from "../src/data";
+import { journalFixtures } from "./journal-fixtures";
+const published = (await journalFixtures()).filter((post) => !post.draft);
+const publicationLabel = (count: number) =>
+  `${count} selected ${count === 1 ? "entry" : "entries"}`;
+const journalLabel = (count: number) =>
+  `${count} journal ${count === 1 ? "entry" : "entries"}`;
 const path = "src/data/siteContent.json";
 const original = await readFile(path, "utf8");
 const changed = JSON.parse(original);
@@ -83,38 +90,42 @@ try {
   await page.goto(base + "/publications/", { waitUntil: "networkidle" });
   assert.equal(
     await page.locator("[data-publication-count]").innerText(),
-    "1 selected entry",
+    publicationLabel(academic.publications.length),
   );
   await page.selectOption("#publication-type", "journal");
   assert.equal(
     await page.locator("[data-publication-count]").innerText(),
-    "0 selected entries",
+    publicationLabel(
+      academic.publications.filter((p) => p.type === "journal").length,
+    ),
   );
   await page.selectOption("#publication-type", "preprint");
   assert.equal(
     await page.locator("[data-publication-count]").innerText(),
-    "1 selected entry",
+    publicationLabel(
+      academic.publications.filter((p) => p.type === "preprint").length,
+    ),
   );
-  assert.equal(
-    (await page.locator(".type-label").textContent())?.trim(),
-    "Working paper",
-  );
+  for (const label of await page
+    .locator('[data-publication][data-type="preprint"] .type-label')
+    .allTextContents())
+    assert.equal(label.trim(), "Working paper");
   await page.goto(base + "/journal/", { waitUntil: "networkidle" });
   assert.equal(
     await page.locator("[data-journal-count]").innerText(),
-    "2 journal entries",
+    journalLabel(published.length),
   );
   await page.selectOption("#journal-category", "Research Notes");
   assert.equal(
     await page.locator("[data-journal-count]").innerText(),
-    "1 journal entry",
+    journalLabel(
+      published.filter((post) => post.category === "Research Notes").length,
+    ),
   );
-  assert.equal(
-    (
-      await page.locator("[data-post]:visible .post-meta > span").textContent()
-    )?.trim(),
-    "Lab notes",
-  );
+  for (const label of await page
+    .locator("[data-post]:visible .post-meta > span")
+    .allTextContents())
+    assert.equal(label.trim(), "Lab notes");
   assert.deepEqual(errors, []);
   console.log(
     "PASS: changing only JSON updates headings, br/em, paragraphs, dynamic lunar labels, theme cards, category labels, and live filter counts; HTML remains inert text.",

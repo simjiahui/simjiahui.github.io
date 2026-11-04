@@ -1,0 +1,24 @@
+{
+  "projects": [
+    {
+      "id": "sample-reservoir",
+      "title": "A space for your next research project",
+      "description": "Sample project layout. Add a curated repository, a short research question, and a reproducible example here.",
+      "technologies": [
+        "Python",
+        "Reservoir computing",
+        "Time series"
+      ],
+      "repository": "",
+      "demo": "",
+      "image": "/images/network.svg",
+      "publication": "",
+      "themes": [
+        "reservoir",
+        "forecasting"
+      ],
+      "featured": true,
+      "placeholder": true
+    }
+  ]
+}

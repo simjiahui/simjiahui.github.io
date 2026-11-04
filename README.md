@@ -6,7 +6,7 @@ The initial name, publication, project, photographs, and journal examples are ex
 
 ## Start here — no terminal needed for content
 
-1. Open [CONTENT_GUIDE.md](CONTENT_GUIDE.md) for browser-only editing instructions.
+1. Open [CONTENT_GUIDE.md](CONTENT_GUIDE.md) to connect the free [Pages CMS dashboard](https://app.pagescms.org) and edit on a content branch. The repository's `.pages.yml` supplies the visual editors; the website stays on Astro and GitHub Pages.
 2. Replace the name in `src/data/profile.json` and edit website wording/biography in `src/data/siteContent.json`.
 3. Add verified academic records to `src/data/academic.json`.
 4. Under repository **Settings → Pages → Build and deployment**, select **GitHub Actions**.
@@ -43,6 +43,7 @@ npm run lint           # Prettier formatting, including Astro
 npm run build          # validated CV + static site + internal links/fragments
 npm run test:browser    # production preview + Playwright + axe + screenshots
 npm run test:reference  # isolated location change + rendered labels + browser calculations
+npm run test:cms        # isolated CMS saves, article drafts/RSS, media, projects, and CV
 ```
 
 For browser checks, either install Chromium using `npx playwright install --with-deps chromium`, use `/usr/bin/chromium`, or set `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` to an installed browser. The test runner starts/stops its own local preview and writes screenshots and a report to ignored `artifacts/`.

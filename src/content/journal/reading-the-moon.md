@@ -7,6 +7,7 @@ tags: [moon, visualization, sample]
 cover: /images/waves.svg
 coverAlt: "Illustrated moon above layered ocean curves"
 sample: true
+draft: false
 ---
 
 This is a **sample essay**, not a record of personal experiences. It demonstrates how a quieter, less technical entry can sit beside research notes.

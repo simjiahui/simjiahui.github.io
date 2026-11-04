@@ -4,6 +4,11 @@ import { preview } from "astro";
 import { existsSync } from "node:fs";
 import { mkdir, writeFile, readFile } from "node:fs/promises";
 import assert from "node:assert/strict";
+import { academic } from "../src/data";
+import { siteContent } from "../src/data/siteContent";
+import { journalFixtures } from "./journal-fixtures";
+const journal = await journalFixtures();
+const published = journal.filter((post) => !post.draft);
 import { setTimeout as delay } from "node:timers/promises";
 
 await mkdir("artifacts", { recursive: true });
@@ -58,8 +63,7 @@ try {
     "/about/",
     "/cv/",
     "/colophon/",
-    "/journal/a-small-reservoir/",
-    "/journal/reading-the-moon/",
+    ...published.map((post) => `/journal/${post.slug}/`),
     "/404.html",
   ];
   for (const route of routes) {
@@ -126,7 +130,7 @@ try {
       "/journal/",
       "/about/",
       "/cv/",
-      "/journal/a-small-reservoir/",
+      ...published.slice(0, 1).map((post) => `/journal/${post.slug}/`),
     ]) {
       await page.goto(base + route, { waitUntil: "networkidle" });
       const dimensions = await page.evaluate(() => ({
@@ -169,30 +173,61 @@ try {
     }
   }
   report.checks.push(
-    "11 routes scanned with axe; 8 routes checked at 1440, 768, 390, and 320px; images and headings validated.",
+    `${routes.length} routes scanned with axe; responsive routes checked at 1440, 768, 390, and 320px; images and headings validated.`,
   );
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(base + "/publications/", { waitUntil: "networkidle" });
-  await page.selectOption("#publication-type", "journal");
-  assert.equal(
-    await page.locator("[data-publication-empty]").isVisible(),
-    true,
-  );
-  await page.selectOption("#publication-type", "preprint");
-  assert.equal(await page.locator("[data-publication]:visible").count(), 1);
-  await page.selectOption("#publication-year", "sample");
-  assert.equal(await page.locator("[data-publication]:visible").count(), 1);
+  for (const type of ["journal", "preprint"]) {
+    const expected = academic.publications.filter(
+      (p) => p.type === type,
+    ).length;
+    await page.selectOption("#publication-type", type);
+    assert.equal(
+      await page.locator("[data-publication]:visible").count(),
+      expected,
+    );
+    assert.equal(
+      await page.locator("[data-publication-empty]").isVisible(),
+      expected === 0,
+    );
+  }
+  await page.selectOption("#publication-type", "all");
+  for (const year of await page
+    .locator("#publication-year option")
+    .evaluateAll((options) =>
+      options.map((option) => (option as HTMLOptionElement).value),
+    )) {
+    await page.selectOption("#publication-year", year);
+    const expected = academic.publications.filter(
+      (p) =>
+        year === "all" ||
+        (p.placeholder ? "sample" : p.date.slice(0, 4)) === year,
+    ).length;
+    assert.equal(
+      await page.locator("[data-publication]:visible").count(),
+      expected,
+    );
+  }
   await page.goto(base + "/journal/", { waitUntil: "networkidle" });
-  await page.selectOption("#journal-category", "Mathematics");
-  assert.equal(await page.locator("[data-journal-empty]").isVisible(), true);
-  await page.selectOption("#journal-category", "Research Notes");
-  assert.equal(await page.locator("[data-post]:visible").count(), 1);
+  for (const category of ["Mathematics", "Research Notes"]) {
+    const expected = published.filter(
+      (post) => post.category === category,
+    ).length;
+    await page.selectOption("#journal-category", category);
+    assert.equal(await page.locator("[data-post]:visible").count(), expected);
+    assert.equal(
+      await page.locator("[data-journal-empty]").isVisible(),
+      expected === 0,
+    );
+  }
   report.checks.push(
     "Publication type/year and journal category filters return expected records and empty states.",
   );
   // A test-only citation is injected into the served HTML; it never becomes site content.
   const fixtureCitation = "@misc{ui-test,title={Test fixture only}}";
-  const fixture = `<section id="citation-test"><details open><summary>Test-only citation fixture</summary><pre>${fixtureCitation}</pre><button data-copy="${fixtureCitation}">Copy test citation</button><button data-download="${fixtureCitation}" data-filename="ui-test.bib">Download test citation</button><span role="status"></span></details></section>`;
+  const attribute = (value: string) =>
+    value.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+  const fixture = `<section id="citation-test" data-citation-messages data-copied="${attribute(siteContent.publications.card.copied)}" data-copy-failed="${attribute(siteContent.publications.card.copyFailed)}"><details open><summary>Test-only citation fixture</summary><pre>${fixtureCitation}</pre><button data-copy="${fixtureCitation}">Copy test citation</button><button data-download="${fixtureCitation}" data-filename="ui-test.bib">Download test citation</button><span role="status"></span></details></section>`;
   await context.grantPermissions(["clipboard-read", "clipboard-write"], {
     origin: base,
   });
@@ -212,9 +247,10 @@ try {
       .getByRole("button", { name: "Copy test citation", exact: true })
       .click();
     await page.waitForFunction(
-      () =>
+      (expected) =>
         document.querySelector("#citation-test [role=status]")?.textContent ===
-        "Citation copied.",
+        expected,
+      siteContent.publications.card.copied,
     );
     assert.equal(
       await page.evaluate(() => navigator.clipboard.readText()),
@@ -291,8 +327,25 @@ try {
   assert.equal((await cv.body()).subarray(0, 5).toString(), "%PDF-");
   const rss = await page.request.get(base + "/rss.xml");
   const feed = await rss.text();
-  assert.match(feed, /a-small-reservoir/);
-  assert.match(feed, /\[Sample article\]/);
+  const items = await page.evaluate((xml) => {
+    const doc = new DOMParser().parseFromString(xml, "application/xml");
+    return [...doc.querySelectorAll("item")].map((item) => ({
+      link: item.querySelector("link")?.textContent,
+      description: item.querySelector("description")?.textContent,
+    }));
+  }, feed);
+  assert.equal(items.length, published.length);
+  for (const post of journal) {
+    const item = items.find((item) =>
+      item.link?.endsWith(`/journal/${post.slug}/`),
+    );
+    if (post.draft) assert.equal(item, undefined);
+    else
+      assert.equal(
+        item?.description,
+        `${post.sample ? siteContent.journal.rss.samplePrefix : ""}${post.description}`,
+      );
+  }
   const sitemap = await page.request.get(base + "/sitemap-index.xml");
   assert.equal(sitemap.status(), 200);
   assert.match(await sitemap.text(), /sitemap/);
